@@ -1,39 +1,48 @@
 import { graphql, PageProps } from 'gatsby';
 import ProductCard from '@/components/ProductCard';
 import React from 'react';
-import { productsProp,productProp } from 'type';
+import { productsProp, productProp } from 'type';
+import Layout from '@/components/Layout';
 import useStore from '@/context/StoreContext';
 const Products = ({ data }: productsProp) => {
-
-
   console.log(data, 'usestore', useStore());
   return (
-    <div>
-      {data.allShopifyProduct.edges.map((product, index) => (
-        <ProductCard product={product} key={index}/>
-      ))}
-    </div>
+    <Layout>
+      <div>
+        {data.allShopifyProduct.edges.map((product, index) => (
+          <ProductCard product={product} key={index} />
+        ))}
+      </div>
+    </Layout>
   );
 };
 
-export const query = graphql`
+export const productsQuery = graphql`
   {
     allShopifyProduct {
       edges {
         node {
-          title
+          description
+          featuredImage {
+            src
+          }
           handle
+          title
           variants {
-            shopifyId
+            id
+          }
+          tags
+          media {
+            preview {
+              image {
+                src
+              }
+            }
           }
           priceRangeV2 {
             maxVariantPrice {
               amount
             }
-          }
-          description
-          featuredImage {
-            src
           }
         }
       }

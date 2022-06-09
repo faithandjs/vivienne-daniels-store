@@ -1,17 +1,23 @@
 export interface productDetails {
   description: string;
-    featuredImage: {
-      src: string;
+  featuredImage: {
+    src: string;
+  };
+  id: string;
+  handle: string;
+  media: {
+    preview: {
+      image: { src: string };
     };
-    id: string;
-    handle: string;
-    priceRangeV2: {
-      maxVariantPrice: {
-        amount: number;
-      };
+  }[];
+  priceRangeV2: {
+    maxVariantPrice: {
+      amount: number;
     };
-    title: string;
-    variants: { shopifyId: string }[];
+  };
+  tags:string[];
+  title: string;
+  variants: { shopifyId: string }[];
 }
 export interface productProp {
   node: productDetails;

@@ -49,10 +49,10 @@ export const StoreProvider = ({ children }: any) => {
     }
     setCheckout(checkout);
   };
-/////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////
   useEffect(() => {
     const initializeCheckout = async () => {
-      const existingCheckoutID = isBrowser
+      const existingCheckoutID = isBrowser //checkout.id from ls
         ? localStorage.getItem(localStorageKey)
         : null;
       console.log('existingCheckoutID', existingCheckoutID);
@@ -60,7 +60,7 @@ export const StoreProvider = ({ children }: any) => {
         try {
           const existingCheckout = await client.checkout.fetch(
             existingCheckoutID,
-          );
+          ); //usiing the id to get the chechout items
           if (!existingCheckout.completedAt) {
             setCheckoutItem(existingCheckout);
             return;
@@ -69,14 +69,13 @@ export const StoreProvider = ({ children }: any) => {
           localStorage.setItem(localStorageKey, 'catch e');
         }
       }
-
       const newCheckout = await client.checkout.create();
       setCheckoutItem(newCheckout);
     };
 
     initializeCheckout();
   }, []);
-/////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////
   const addVariantToCart = async (product: any, quantity: any) => {
     setLoading(true);
 

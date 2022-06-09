@@ -1,0 +1,18 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+html,
+body {
+  font-size: 18px;
+}
+section {
+  margin: clamp(18px, 4vh, 35px) 0;
+}
+.title {
+  text-align: center;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  margin: clamp(10px, 3vh, 22px);
+}

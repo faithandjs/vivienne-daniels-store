@@ -1,0 +1,52 @@
+.iotd {
+  overflow: hidden;
+  .title {
+  }
+  .images {
+    display: flex;
+    width: max-content;
+    border: 3px solid #ffffff;
+    margin: clamp(18px, 4vh, 35px) 0;
+
+    .img-box {
+      width: max-content;
+      height: 350px;
+      border: 5px dashed black;
+      border-top-style: solid;
+      border-bottom-style: solid;
+      border-right: 0;
+      &:first-child {
+        //  border-left-style:  solid;
+      }
+      &:last-child {
+        border-right: 5px dashed black;
+        // border-right-style:  solid;
+      }
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+  .details {
+    p {
+      text-align: center;
+      text-transform: uppercase;
+      line-height: 1.2;
+      &:first-child {
+        font-size: 1.3rem;
+        font-weight: bold;
+      }
+      &:last-child {
+        span {
+          &:first-child {
+          }
+          &:nth-child(2) {
+          }
+          &:last-child {
+          }
+        }
+      }
+    }
+  }
+}

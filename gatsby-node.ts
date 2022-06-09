@@ -16,28 +16,36 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
 
   const result = await graphql(`
-    {
-      allShopifyProduct {
-        edges {
-          node {
-            title
-            handle
-            variants {
-              shopifyId
-            }
-            priceRangeV2 {
-              maxVariantPrice {
-                amount
+  {
+    allShopifyProduct {
+      edges {
+        node {
+          description
+          featuredImage {
+            src
+          }
+          handle
+          title
+          variants {
+            id
+          }
+          tags
+          media {
+            preview {
+              image {
+                src
               }
             }
-            description
-            featuredImage {
-              src
+          }
+          priceRangeV2 {
+            maxVariantPrice {
+              amount
             }
           }
         }
       }
     }
+  }
   `);
   console.log(result);
   // Iterate over all products and create a new page using a template
