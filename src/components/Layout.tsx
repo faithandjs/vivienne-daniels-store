@@ -1,20 +1,43 @@
-import React from 'react';
-import Products from '@/pages/products';
+import '../styles/layout.scss';
 import { Link } from 'gatsby';
 interface prop {
-    children: JSX.Element
+  children: JSX.Element;
+  page: 'home' | 'about' | 'products' | 'wishlist' | 'cart';
 }
-const Layout = ({children}: prop) => {
+const Layout = ({ children, page }: prop) => {
+  const style = {};
+  console.log(page)
   return (
     <>
-      <header>
-        header, add menu 
-        <Link to="/products">
-          <span>products</span>
-        </Link>
+      <header className={page}>
+        <div className="logo">
+          <Link to="/about">vd</Link>
+        </div>
+        <div className="links">
+          <Link to="/">
+            <span id="home">home</span>
+          </Link>
+          <Link to="/about">
+            <span id="about">about VD</span>
+          </Link>
+          <Link to="/products">
+            <span id="products">products</span>
+          </Link>
+          <Link to="/wishlist">
+            <span id="wishlist">wishlist</span>
+          </Link>
+          <Link to="/cart">
+            <span id="cart">cart</span>
+          </Link>
+        </div>
       </header>
       {children}
-      <footer>footer, add cc and contact details</footer>
+      <footer id="contact">
+        <span>faith okogbo</span>
+        <span>instagram</span>
+        <span>twitter</span>
+        <span>email</span>
+      </footer>
     </>
   );
 };

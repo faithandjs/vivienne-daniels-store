@@ -2,23 +2,26 @@ import React from 'react';
 import { productCardProp } from 'type';
 import { Link } from 'gatsby';
 const ProductCard = ({ product }: productCardProp) => {
-  const { description, featuredImage, handle, priceRangeV2, title, variants } =
-    product.node;
+  const { featuredImage, handle, priceRangeV2, title, variants } = product.node;
   return (
-    <div>
+    <div className="product-card">
       <Link to={`/products/${handle}`}>
-          <h1>{title}</h1>
-          <div>
-            <img src={featuredImage.src} alt={`image of ${title}`} />
+        <div className="img-box">
+          <img src={featuredImage.src} alt={`image of ${title}`} />
+        </div>
+        <div className="details">
+          {' '}
+          <h3>{title}</h3>
+          <div className="extra">
+            <p>
+              <span>eur </span>
+              <span>{priceRangeV2.maxVariantPrice.amount}</span>
+            </p>
+            <div className="add">
+              <img src="https://img.icons8.com/external-tanah-basah-glyph-tanah-basah/96/undefined/external-plus-user-interface-tanah-basah-glyph-tanah-basah-2.png" />
+            </div>
           </div>
-          <p>{description}</p>
-          <p>{handle}</p>
-          <p>{priceRangeV2.maxVariantPrice.amount} </p>
-          <ul>
-            {variants.map((item, index) => {
-              return <li key={index}>{item.shopifyId} </li>;
-            })}
-          </ul>
+        </div>
       </Link>
     </div>
   );

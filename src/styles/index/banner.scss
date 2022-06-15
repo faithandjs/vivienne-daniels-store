@@ -1,0 +1,71 @@
+section.banner {
+  padding: 0;
+  height: 90vh;
+  position: relative;
+  .img-box {
+    width: 100%;
+    height: inherit;
+    img {
+      object-position: 35% 40%;
+      object-fit: cover;
+    }
+  }
+  .text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.212);
+    p {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      text-align: center;
+      text-transform: uppercase;
+      color: #fff;
+      font-size: 7vw;
+      font-style: italic;
+      transform-origin: top center;
+      //animation: banner-text 0.5s ease-in 0.2s 1 backwards,
+       // banner-text1 0.5s ease-in 0.5s 1 backwards,
+       // banner-text2 0.5s ease-in 1s 1 backwards,
+       // banner-text3 0.3s ease-in 1.5s 1 backwards;
+    }
+  }
+}
+@keyframes banner-text {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(10deg);
+  }
+}
+@keyframes banner-text1 {
+  0% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(-10deg);
+  }
+}
+@keyframes banner-text2 {
+  0% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(2deg);
+  }
+}
+@keyframes banner-text3 {
+  0% {
+    transform: rotate(2deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}

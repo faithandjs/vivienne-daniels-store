@@ -1,3 +1,3 @@
-import CombinedProvider from "./src/context/CombinedProvider"
+import CombinedProvider from './src/context/CombinedProvider';
 
-export const wrapRootElement = CombinedProvider
+export const wrapRootElement = CombinedProvider;

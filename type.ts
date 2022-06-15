@@ -15,9 +15,9 @@ export interface productDetails {
       amount: number;
     };
   };
-  tags:string[];
+  tags: string[];
   title: string;
-  variants: { shopifyId: string }[];
+  variants: { shopifyId: string; displayName?: string }[];
 }
 export interface productProp {
   node: productDetails;

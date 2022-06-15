@@ -1,56 +1,58 @@
 import DesignerImage from '@/components/DesignerImage';
 import Layout from '@/components/Layout';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import { useEffect, useRef, useState } from 'react';
 import '../styles/global.scss';
-import '../styles/iotd.scss';
-import '../styles/shop.scss';
+import '../styles/index/iotd.scss';
+import '../styles/index/new-arrivals.scss';
+import '../styles/index/shop.scss';
+import '../styles/index/banner.scss';
 
 export default function Home({ data }: any) {
   const { media, priceRangeV2, title } = data.shopifyProduct;
   const products = data.allShopifyProduct.edges;
-  const length = products.length;
-  const array = useRef<number[]>([]);
+  const allTags = useRef<string[]>([]);
+  const rollingArr = [
+    'louis vuitton',
+    'yves saint laurent',
+    'prada',
+    'chanel',
+    'dior',
+    'shoes',
+    'bags',
+  ];
 
-  const newArrivals = () => {
-    while (array.current.length < 4) {
-      const n = Math.round(Math.random() * length);
-      if (
-        (!array.current.find((num) => num === n) ||
-          array.current.find((num) => num === n) !== 0) &&
-        products[n].node.title !== 'VERSACE MEDUSA AEVITAS PLATFORM PUMPS'
-      ) {
-        array.current.push(n);
-      }
-    }
+  const returnRollingArr = () => {
+    products.map((item: any) => {
+      item.node.tags.map((tag: string) => {
+        if (!allTags.current.find((item) => item === tag)) {
+          allTags.current.push(tag);
+        }
+      });
+    });
     return (
-      <>
-        {products.map((item: any, index: number) => {
-          const { featuredImage, priceRangeV2, title } = item.node;
-          if (
-            array.current.find((num) => num === index) ||
-            array.current.find((num) => num === index) === 0
-          ) {
-            return (
-              <div key={index}>
-                <div className="img-box">
-                  <img src={featuredImage.src} alt={title} />
-                </div>
-                <div className="details">
-                  <span>{title}</span>
-                </div>
-              </div>
-            );
-          }
-        })}
-      </>
+      <div>
+        {rollingArr.map((item, index: number) => (
+          <span key={index}>{item} </span>
+        ))}
+      </div>
     );
   };
 
   return (
-    <Layout>
+    <Layout page='home'>
       <>
-        <section className="banner"></section>
+        <section className="banner">
+          <div className="img-box">
+            <img
+              src="/static/images/cover-image-unsplash-banner.jpg"
+              alt="banner: prada bag"
+            />
+          </div>
+          <div className="text">
+            <p>we love designers!</p>
+          </div>
+        </section>
         <section className="iotd">
           <div className="title">Item of the day</div>
           <div className="images">
@@ -74,14 +76,41 @@ export default function Home({ data }: any) {
             </p>
           </div>
         </section>
-        <section className="new">
-          <div className="title">new arrivals</div>
-          <div className="images">{newArrivals()}</div>
-        </section>
         <section className="shop">
-          <div className="title">shop designers</div>
+          <div className="title">our shop</div>
           <div className="designers">
-            <div className="names"> lalllaala</div>
+            <div className="shoes-bags">
+              <DesignerImage src0="lv-" src="bags" ex="webp" button="bags" page='product'/>
+              <DesignerImage src0="twt-ysl-" src="shoes" button="shoes" page='product'/>
+            </div>
+            <div className="tags">
+              <div className="box">
+                {returnRollingArr()}
+                {returnRollingArr()}
+                {returnRollingArr()}
+                {returnRollingArr()}
+                {returnRollingArr()}
+                {returnRollingArr()}
+                {returnRollingArr()}
+                {returnRollingArr()}
+                {returnRollingArr()}
+                {returnRollingArr()}
+                {returnRollingArr()}
+                {returnRollingArr()}
+                {returnRollingArr()}
+                {returnRollingArr()}
+                {returnRollingArr()}
+                {returnRollingArr()}
+                {returnRollingArr()}
+                {returnRollingArr()}
+                {returnRollingArr()}
+                {returnRollingArr()}
+                {returnRollingArr()}
+                {returnRollingArr()}
+                {returnRollingArr()}
+                {returnRollingArr()}
+              </div>
+            </div>
             <div className="grid">
               <div className="up">
                 <DesignerImage
@@ -90,13 +119,15 @@ export default function Home({ data }: any) {
                   button="Louis Vuitton"
                 />
                 <div className="all">
-                  <span>all products</span>
+                  <Link to="/products">
+                    <span>all products</span>
+                  </Link>
                 </div>
                 <DesignerImage src="ysl" title="Yves Saint Laurent" />
               </div>
               <div className="down">
                 <DesignerImage src="chanel" />
-                <DesignerImage src="dior" title="Christian Dior" />
+                <DesignerImage src="dior" title="Christian Dior"  page='christian-dior'/>
                 <DesignerImage src="prada" />
               </div>
             </div>
@@ -115,6 +146,7 @@ export const query = graphql`
             src
           }
           title
+          tags
           priceRangeV2 {
             maxVariantPrice {
               amount

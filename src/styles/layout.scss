@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Jacques+Francois+Shadow&display=swap');
+@import 'colors';
+@mixin undelinePage($page) {
+  ##{$page}::before {
+    background-image: linear-gradient(
+      45deg,
+      lightcoral,
+      rgb(249, 252, 73),
+      pink,
+      rgb(88, 174, 255)
+    );
+  }
+}
+
+header,
+footer {
+  z-index: 3;
+  background-color: $background;
+  color: $white;
+  display: flex;
+  width: 100%;
+  span {
+    white-space: nowrap;
+    margin: 0 2vw;
+    padding-bottom: 1px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0);
+    text-transform: lowercase;
+    font-style: italic;
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0px;
+      width: 100%;
+      height: 1.5px;
+    }
+    &:hover {
+      cursor: pointer;
+      &::before {
+        background-image: linear-gradient(
+          45deg,
+          lightcoral,
+          rgb(249, 252, 73),
+          pink,
+          rgb(88, 174, 255)
+        );
+      }
+    }
+  }
+ &.home{ @include undelinePage('home');}
+ &.about{ @include undelinePage('about');}
+ &.products{ @include undelinePage('products');}
+ &.wishlist{ @include undelinePage('wishlist');}
+ &.cart{ @include undelinePage('cart');}
+}
+header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  height: 100px;
+  width: 100%;
+  align-items: center;
+  font-size: 1.2rem;
+  padding: 0 20px;
+  .logo {
+    a {
+      font-family: 'Jacques Francois Shadow', cursive;
+      font-size: 2rem;
+    }
+    text-transform: uppercase;
+  }
+  .links {
+    width: -webkit-fill-available;
+    display: flex;
+    justify-content: center;
+  }
+}
+footer {
+  height: 100px;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 0 20vw 2vh;
+  font-size: 0.9rem;
+  // position: absolute;
+  bottom: 0;
+}
+@keyframes underline {
+  
+}

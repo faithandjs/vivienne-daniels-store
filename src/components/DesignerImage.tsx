@@ -1,19 +1,27 @@
-
+import { Link } from 'gatsby';
 const DesignerImage = ({
+  src0 = 'cover-image-unsplash-',
+  ex = 'jpg',
   src,
   button = src,
-  title = src.charAt(0).toUpperCase() + src.substring(1),
+  title = src, 
+  page// src.charAt(0).toUpperCase() + src.substring(1),
 }: {
+  src0?: string;
+  ex?: string;
   src: string;
   button?: string;
   title?: string;
+  page?: string;
 }) => {
   return (
     <div className="img-box">
-      <img src={`/static/images/cover-image-unsplash-${src}.jpg`} alt={title} />
-      <div className="overlay">
-        <button>{button}</button>
-      </div>
+      <Link to={`/shop/${page}`}>
+        <img src={`/static/images/${src0 + src + '.' + ex}`} alt={title} />
+        <div className="overlay">
+          <button>{button}</button>
+        </div>{' '}
+      </Link>
     </div>
   );
 };
