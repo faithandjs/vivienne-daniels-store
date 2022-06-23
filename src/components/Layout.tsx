@@ -2,11 +2,10 @@ import '../styles/layout.scss';
 import { Link } from 'gatsby';
 interface prop {
   children: JSX.Element;
-  page: 'home' | 'about' | 'products' | 'wishlist' | 'cart';
+  page: 'home' | 'about' | 'products' | 'wishlist' | 'cart' | 'none';
 }
 const Layout = ({ children, page }: prop) => {
-  const style = {};
-  console.log(page)
+
   return (
     <>
       <header className={page}>

@@ -159,9 +159,7 @@ const Products = ({ data }: productsProp) => {
           >
             Showing results for '<span>{`${showing}`}</span>'.
           </div>
-        ) : (
-          <></>
-        )}
+        ) : (  <></> )}
         <section
           className="products"
           onMouseOver={() => {

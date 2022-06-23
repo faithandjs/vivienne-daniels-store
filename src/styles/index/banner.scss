@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Play&display=swap');
+$weLove: rgba(255, 255, 255, 0.827);
+// $weLove: rgba(235, 178, 178, 0.827);
 section.banner {
   padding: 0;
   height: 90vh;
@@ -11,61 +14,42 @@ section.banner {
     }
   }
   .text {
+    font-family: 'Play', sans-serif;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.212);
-    p {
-      position: absolute;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    svg {
+      text-transform: uppercase;
       height: 100%;
       width: 100%;
-      text-align: center;
-      text-transform: uppercase;
-      color: #fff;
-      font-size: 7vw;
-      font-style: italic;
-      transform-origin: top center;
-      //animation: banner-text 0.5s ease-in 0.2s 1 backwards,
-       // banner-text1 0.5s ease-in 0.5s 1 backwards,
-       // banner-text2 0.5s ease-in 1s 1 backwards,
-       // banner-text3 0.3s ease-in 1.5s 1 backwards;
+      position: relative;
+      width: 100%;
+      text {
+        transform: translate(10%, 40%);
+        font-size: 8vw;
+        stroke: $weLove;
+        stroke-width: 1px;
+        stroke-dasharray: none;
+        stroke-dashoffset: 900;
+        fill:  rgba(255, 255, 255, 0.267);
+        // fill:  rgba(235, 178, 178, 0.267);
+        animation: dash 6s ease-out alternate 1 backwards;
+      }
     }
   }
 }
-@keyframes banner-text {
-  0% {
-    transform: rotate(0deg);
+@keyframes dash {
+  from {
+    stroke-dasharray: 900;
+    stroke-dashoffset: 900;
+    fill: transparent;
   }
-  100% {
-    transform: rotate(10deg);
-  }
-}
-@keyframes banner-text1 {
-  0% {
-    transform: rotate(10deg);
-  }
-  100% {
-    transform: rotate(-10deg);
-  }
-}
-@keyframes banner-text2 {
-  0% {
-    transform: rotate(-10deg);
-  }
-  100% {
-    transform: rotate(2deg);
-  }
-}
-@keyframes banner-text3 {
-  0% {
-    transform: rotate(2deg);
-  }
-  100% {
-    transform: rotate(0deg);
+  to {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    // fill: $weLove;
   }
 }

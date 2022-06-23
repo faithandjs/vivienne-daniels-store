@@ -6,10 +6,9 @@ interface prop {
 }
 const Product = ({ pageContext }: any) => {
   const { description, featuredImage, handle, priceRangeV2, title, variants } =
-    pageContext;
-  console.log(pageContext);
+    pageContext.product;
   return (
-    <Layout>
+    <Layout page='none'>
       <div>
         <div className="img-box">
        

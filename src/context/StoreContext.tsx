@@ -13,7 +13,7 @@ interface valuesProp {
   loading: boolean;
   addVariantToCart: (product: any, quantity: any) => void;
   removeLineItem: (variantId: any) => void;
-  client: any;
+  client: Client.Client;
   checkout: {
     id: string;
     lineItems: any[];
@@ -34,7 +34,6 @@ const defaultValues = {
 };
 
 const StoreContext = createContext<valuesProp>(defaultValues);
-
 const isBrowser = typeof window !== `undefined`;
 const localStorageKey = `shopify_checkout_id`;
 
@@ -55,7 +54,7 @@ export const StoreProvider = ({ children }: any) => {
       const existingCheckoutID = isBrowser //checkout.id from ls
         ? localStorage.getItem(localStorageKey)
         : null;
-      console.log('existingCheckoutID', existingCheckoutID);
+      // console.log('existingCheckoutID', existingCheckoutID);
       if (existingCheckoutID && existingCheckoutID !== `null`) {
         try {
           const existingCheckout = await client.checkout.fetch(
@@ -78,16 +77,16 @@ export const StoreProvider = ({ children }: any) => {
   /////////////////////////////////////////////////////////////////
   const addVariantToCart = async (product: any, quantity: any) => {
     setLoading(true);
-
+    console.log(product);
     if (checkout.id === '') {
       console.error('No checkout ID assigned.');
       return;
     }
 
     const checkoutID = checkout.id;
-    const variantId = product.variants[0]?.shopifyId;
+    const variantId = product.variants[0]?.id;
     const parsedQuantity = parseInt(quantity, 10);
-
+    console.log(checkoutID, variantId, client);
     const lineItemsToUpdate = [
       {
         variantId,
@@ -96,12 +95,14 @@ export const StoreProvider = ({ children }: any) => {
     ];
 
     try {
+      console.log('try', checkout, client);
       const res = await client.checkout.addLineItems(
         checkoutID,
         lineItemsToUpdate,
       );
+      console.log('try client');
       setCheckout(res);
-
+      console.log(res);
       let updatedCart = [];
       if (cart.length > 0) {
         const itemIsInCart = cart.find(
@@ -132,6 +133,7 @@ export const StoreProvider = ({ children }: any) => {
       console.error(`Error in addVariantToCart: ${error}`);
     }
   };
+
   /////////////////////////////////////////////////////////////////
   const removeLineItem = async (variantId: any) => {
     setLoading(true);
@@ -165,6 +167,7 @@ export const StoreProvider = ({ children }: any) => {
       console.error(`Error in removeLineItem: ${error}`);
     }
   };
+
   /////////////////////////////////////////////////////////////////
 
   return (
@@ -182,7 +185,6 @@ export const StoreProvider = ({ children }: any) => {
     </StoreContext.Provider>
   );
 };
-/////////////////////////////////////////////////////////////////
 
 const useStore = () => {
   const context = useContext(StoreContext);

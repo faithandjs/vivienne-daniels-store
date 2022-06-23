@@ -40,7 +40,7 @@ export default function Home({ data }: any) {
   };
 
   return (
-    <Layout page='home'>
+    <Layout page="home">
       <>
         <section className="banner">
           <div className="img-box">
@@ -50,7 +50,12 @@ export default function Home({ data }: any) {
             />
           </div>
           <div className="text">
-            <p>we love designers!</p>
+            {/* <p></p> */}
+            <svg>
+              <text x="0" y="100">
+                we love designers!
+              </text>
+            </svg>
           </div>
         </section>
         <section className="iotd">
@@ -80,8 +85,19 @@ export default function Home({ data }: any) {
           <div className="title">our shop</div>
           <div className="designers">
             <div className="shoes-bags">
-              <DesignerImage src0="lv-" src="bags" ex="webp" button="bags" page='product'/>
-              <DesignerImage src0="twt-ysl-" src="shoes" button="shoes" page='product'/>
+              <DesignerImage
+                src0="lv-"
+                src="bags"
+                ex="webp"
+                button="bags"
+                page="product"
+              />
+              <DesignerImage
+                src0="twt-ysl-"
+                src="shoes"
+                button="shoes"
+                page="product"
+              />
             </div>
             <div className="tags">
               <div className="box">
@@ -127,7 +143,11 @@ export default function Home({ data }: any) {
               </div>
               <div className="down">
                 <DesignerImage src="chanel" />
-                <DesignerImage src="dior" title="Christian Dior"  page='christian-dior'/>
+                <DesignerImage
+                  src="dior"
+                  title="Christian Dior"
+                  page="christian-dior"
+                />
                 <DesignerImage src="prada" />
               </div>
             </div>
