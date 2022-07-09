@@ -2,28 +2,37 @@
   overflow: hidden;
   .title {
   }
-  .images {
-    display: flex;
-    width: max-content;
-    border: 3px solid #ffffff;
+  .images-box {
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
     margin: clamp(18px, 4vh, 35px) 0;
-
-    .img-box {
+    display: flex;
+    position: relative;
+    .images {
+      display: flex;
       width: max-content;
-      height: 350px;
-      border: 5px dashed black;
-      border-top-style: solid;
-      border-bottom-style: solid;
-      border-right: 0;
-      &:first-child {
-        //  border-left-style:  solid;
+
+      .img-box {
+        width: max-content;
+        height: 350px;
+        border: 5px dashed black;
+        border-top: 0; // solid;
+        border-bottom: 0; //solid;
+        border-right: 0;
+        &:first-child {
+          //  border-left-style:  solid;
+        }
+        &:last-child {
+          border-right: 5px dashed black;
+          // border-right-style:  solid;
+        }
+        img {
+        }
       }
       &:last-child {
-        border-right: 5px dashed black;
-        // border-right-style:  solid;
-      }
-      img {
-        
+        position: absolute;
+        top: 0;
+        left: 0;
       }
     }
   }

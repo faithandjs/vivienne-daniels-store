@@ -2,33 +2,80 @@ import { graphql } from 'gatsby';
 import ProductCard from '@/components/ProductCard';
 import { productsProp, productProp, productDetails } from 'type';
 import Layout from '@/components/Layout';
-import useStore from '@/context/StoreContext';
+import useStoreContext from '@/context/context';
 import '../styles/products.scss';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { type } from 'os';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const Products = ({ data }: productsProp) => {
+  gsap.registerPlugin(ScrollTrigger);
+  const { editWishlist, wishlist, setfilling } = useStoreContext();
   const [input, setInput] = useState('');
   const [showing, setShowing] = useState('');
-  const [display, setDisplay] = useState<{ display: 'block' | 'none' }>({
-    display: 'none',
-  });
+  const passed = useRef(false);
+
   const [current, setCurrent] = useState<
     productProp[] | 'no products match your search'
   >(data.allShopifyProduct.edges);
 
+  const settingDisplay = (x: boolean) => {
+    if (!x) {
+      gsap.to('.search-box', {
+        x: '-100%',
+        ease: 'power2.out',
+        duration: 0.4,
+      });
+      gsap.to('.filter', {
+        x: 0,
+        duration: 0.2,
+      });
+    }
+    if (x) {
+      gsap.to('.search-box', {
+        x: 0,
+        ease: 'expo.out',
+        duration: 1,
+      });
+      gsap.to('.filter', {
+        x: '-100%',
+        duration: 0.2,
+      });
+    }
+  };
+  // useEffect(() => {
+  //   const showMenu = gsap
+  //     .from('header.products', {
+  //       yPercent: -100,
+  //       paused: true,
+  //       duration: 0.2,
+  //     })
+  //     .progress(1);
+
+  //   ScrollTrigger.create({
+  //     trigger: 'header.products',
+  //     start: 'bottom top',
+  //     // markers: true,
+  //     endTrigger: 'footer',
+  //     end: 'bottom bottom',
+  //     onUpdate: (self) => {
+  //       self.direction === -1 ? showMenu.play() : showMenu.reverse();
+  //     },
+  //   });
+  // });
   const returnTags = (tag: string, alt?: string) => {
     let temp: productProp[] = [];
     data.allShopifyProduct.edges.map((item) => {
       const x = item.node;
-      const newTag = tag.toLowerCase().trim();
-      const newAlt = alt ? alt.toLowerCase().trim() : null;
-
+      const newTag = tag.toLowerCase().replace(' ', '');
+      const newAlt = alt ? alt.toLowerCase().replace(' ', '') : null;
       const isVariant = (a: productDetails['variants'], b: string) => {
         let newVar: string[] = [];
         let states: boolean[] = [];
-        a.map((v) => {
+        a!.map((v) => {
           if (v.displayName) {
-            newVar.push(v.displayName.toLowerCase().trim());
+            newVar.push(v.displayName.toLowerCase().replace(' ', ''));
           }
         });
         newVar.map((item) => {
@@ -58,121 +105,146 @@ const Products = ({ data }: productsProp) => {
     }
   };
   const returnOptions = (arr: string[] | { a: string; b?: string }[]) => {
+    let selected: 'selected' | '' = '';
     return (
       <>
-        {arr.map((item, index) => (
-          <button
-            onClick={() => {
-              setDisplay({ display: 'none' });
-              setInput(' ');
-              typeof item === 'string'
-                ? returnTags(item)
-                : returnTags(item.a, item.b);
-            }}
-            key={index}
-          >
-            {typeof item === 'string' ? item : item.a}
-          </button>
-        ))}
+        {arr.map((item, index) => {
+          if (typeof item === 'string') {
+            showing === item || input === item
+              ? (selected = 'selected')
+              : (selected = '');
+          } else {
+            showing === item.a || input === item.a
+              ? (selected = 'selected')
+              : (selected = '');
+          }
+          return (
+            <button
+              className={`box-sm ${selected}`}
+              onClick={() => {
+                settingDisplay(false);
+                setInput(' ');
+                typeof item === 'string'
+                  ? returnTags(item)
+                  : returnTags(item.a, item.b);
+              }}
+              key={index}
+            >
+              {typeof item === 'string' ? item : item.a}
+            </button>
+          );
+        })}
       </>
     );
   };
   return (
-    <Layout page='products'>
+    <Layout page="products">
       <>
-        <div className="search">
-          <div className="input-box">
-            <input
-              type="search"
-              name="search-bar"
-              id="search"
-              placeholder="..."
-              value={input}
-              onMouseOver={() => {
-                if (display.display !== 'block')
-                  setDisplay({ display: 'block' });
-              }}
-              onChange={(e) => {
-                setInput(e.target.value);
-              }}
-            />
-            <button
-              onClick={() => {
-                setDisplay({ display: 'none' });
-                returnTags(input);
-              }}
-            >
-              search
-            </button>
-          </div>
-          <div className="options" style={display}>
-            <section>
-              <div>
+        <section className="products-and-menu">
+          <section className="search-box">
+            <div className="search">
+              <div className="input-box">
+                <input
+                  type="search"
+                  name="search-bar"
+                  id="search"
+                  placeholder="..."
+                  value={input}
+                  onChange={(e) => {
+                    setInput(e.target.value);
+                  }}
+                />
                 <button
                   onClick={() => {
-                    setInput('');
-                    setCurrent(data.allShopifyProduct.edges);
-                    setDisplay({ display: 'none' });
+                    settingDisplay(false);
+                    returnTags(input);
                   }}
                 >
-                  all
+                  search
                 </button>
-                {returnOptions([
-                  { a: 'shoes', b: 'shoe' },
-                  { a: 'bags', b: 'bag' },
-                ])}
               </div>
-            </section>
-            <section>
-              <div>
-                {returnOptions([
-                  { a: 'YSL', b: 'yve saint laurent' },
-                  { a: 'louis vuitton', b: 'lv' },
-                  { a: 'chanel' },
-                  { a: 'dior' },
-                  { a: 'hermes' },
-                  { a: 'prada' },
-                ])}
+              <div className="options">
+                <section>
+                  <div>
+                    <button
+                      className="box-sm"
+                      onClick={() => {
+                        settingDisplay(false);
+                        setInput('');
+                        setShowing('');
+                        setCurrent(data.allShopifyProduct.edges);
+                      }}
+                    >
+                      all
+                    </button>
+                    {returnOptions([
+                      { a: 'shoes', b: 'shoe' },
+                      { a: 'bags', b: 'bag' },
+                    ])}
+                  </div>
+                </section>
+                <section>
+                  <div>
+                    {returnOptions([
+                      { a: 'YSL', b: 'yve saint laurent' },
+                      { a: 'louis vuitton', b: 'lv' },
+                      { a: 'chanel' },
+                      { a: 'dior' },
+                      { a: 'hermes' },
+                      { a: 'prada' },
+                    ])}
+                  </div>
+                </section>
+                <section>
+                  <div>
+                    {returnOptions([
+                      { a: 'uk 6', b: '6' },
+                      { a: 'uk 7', b: '7' },
+                      { a: 'uk 8', b: '8' },
+                    ])}
+                  </div>
+                </section>
+                <section>
+                  <div>{returnOptions(['black', 'white', 'pink', 'blue'])}</div>
+                </section>
+                <p></p>
+              </div>{' '}
+              <div className="x" onClick={() => settingDisplay(false)}>
+                <div>
+                  <img src="/static/icons/close.png" alt="close icon" />{' '}
+                </div>
               </div>
-            </section>
-            <section>
-              <div>
-                {returnOptions([
-                  { a: 'uk 6', b: '6' },
-                  { a: 'uk 7', b: '7' },
-                  { a: 'uk 8', b: '8' },
-                ])}
-              </div>
-            </section>
-            <section>
-              <div>{returnOptions(['black', 'white', 'pink', 'blue'])}</div>
-            </section>
-            <p></p>
-          </div>
-        </div>
-        {showing.trim() ? (
+            </div>
+          </section>
           <div
-            className="showing"
-            onMouseOver={() => {
-              if (display.display !== 'none') setDisplay({ display: 'none' });
+            className="filter"
+            onClick={() => {
+              settingDisplay(true);
             }}
           >
-            Showing results for '<span>{`${showing}`}</span>'.
+            <img src="/static/icons/search.png" alt="" />
           </div>
-        ) : (  <></> )}
-        <section
-          className="products"
-          onMouseOver={() => {
-            if (display.display !== 'none') setDisplay({ display: 'none' });
-          }}
-        >
-          {typeof current === 'object' ? (
-            current.map((product, index) => (
-              <ProductCard product={product} key={index} />
-            ))
-          ) : (
-            <div>{current}</div>
-          )}
+          <section className="main">
+            {showing.replace(' ', '') ? (
+              <div className="showing text">
+                Showing results for '<span>{`${showing}`}</span>'.
+              </div>
+            ) : (
+              <div className="title showing"> all products</div>
+            )}
+            <div className="productItems">
+              {typeof current === 'object' ? (
+                current.map((product, index) => {
+                  let fill = setfilling(product.node.title);
+                  return (
+                    <ProductCard product={product} key={index} fill={fill} />
+                  );
+                })
+              ) : (
+                <div>{current}</div>
+              )}
+            </div>
+          </section>
         </section>
       </>
     </Layout>
@@ -190,9 +262,16 @@ export const productsQuery = graphql`
           title
           handle
           variants {
-            id
+            shopifyId
             displayName
+            id
+            storefrontId
+            selectedOptions {
+              name
+              value
+            }
           }
+          id
           tags
           media {
             preview {

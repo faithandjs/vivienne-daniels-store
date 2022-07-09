@@ -2,16 +2,14 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 import fetch from 'isomorphic-fetch';
 import Client from 'shopify-buy';
 
-const client = Client.buildClient(
-  {
-    domain: process.env.GATSBY_SHOPIFY_STORE_URL!,
-    storefrontAccessToken: process.env.GATSBY_STOREFRONT_ACCESS_TOKEN!,
-  }, //, fetch
-);
+const client = Client.buildClient({
+  domain: process.env.GATSBY_SHOPIFY_STORE_URL!,
+  storefrontAccessToken: process.env.GATSBY_STOREFRONT_ACCESS_TOKEN!,
+});
 interface valuesProp {
   cart: any[];
   loading: boolean;
-  addVariantToCart: (product: any, quantity: any) => void;
+  addVariantToCart: (product: any, quantity: any, variant: any) => void;
   removeLineItem: (variantId: any) => void;
   client: Client.Client;
   checkout: {
@@ -48,6 +46,14 @@ export const StoreProvider = ({ children }: any) => {
     }
     setCheckout(checkout);
   };
+  useEffect(() => {
+    // console.log(
+    //   cart,
+    //   cart.length,
+    //   checkout.lineItems,
+    //   checkout.lineItems.length,
+    // );
+  }, [cart]);
   /////////////////////////////////////////////////////////////////
   useEffect(() => {
     const initializeCheckout = async () => {
@@ -75,18 +81,22 @@ export const StoreProvider = ({ children }: any) => {
     initializeCheckout();
   }, []);
   /////////////////////////////////////////////////////////////////
-  const addVariantToCart = async (product: any, quantity: any) => {
+  const addVariantToCart = async (
+    product: any,
+    quantity: any,
+    variant: any,
+  ) => {
     setLoading(true);
-    console.log(product);
+
     if (checkout.id === '') {
       console.error('No checkout ID assigned.');
       return;
     }
 
     const checkoutID = checkout.id;
-    const variantId = product.variants[0]?.id;
+    const variantId = variant;
     const parsedQuantity = parseInt(quantity, 10);
-    console.log(checkoutID, variantId, client);
+    // console.log(checkoutID, variantId, client);
     const lineItemsToUpdate = [
       {
         variantId,
@@ -95,27 +105,24 @@ export const StoreProvider = ({ children }: any) => {
     ];
 
     try {
-      console.log('try', checkout, client);
       const res = await client.checkout.addLineItems(
         checkoutID,
         lineItemsToUpdate,
       );
-      console.log('try client');
       setCheckout(res);
-      console.log(res);
       let updatedCart = [];
       if (cart.length > 0) {
         const itemIsInCart = cart.find(
-          (item: any) => item.product.variants[0]?.shopifyId === variantId,
+          (item: any) => item.product.variants[0]?.storefrontId === variantId,
         );
-
+        console.log(itemIsInCart);
         if (itemIsInCart) {
           const newProduct = {
             product: { ...itemIsInCart.product },
             quantity: itemIsInCart.quantity + parsedQuantity,
           };
           const otherItems = cart.filter(
-            (item) => item.product.variants[0]?.shopifyId !== variantId,
+            (item) => item.product.variants[0]?.storefrontId !== variantId,
           );
           updatedCart = [...otherItems, newProduct];
         } else {
@@ -127,11 +134,23 @@ export const StoreProvider = ({ children }: any) => {
       setCart(updatedCart);
 
       setLoading(false);
-      alert('Item added to cart!');
+      console.log('Item added to cart!');
     } catch (error) {
       setLoading(false);
       console.error(`Error in addVariantToCart: ${error}`);
     }
+    console.log(checkout.lineItems, cart);
+    // const consoleLoop = (arr: any[], x =false )=>{
+    //   arr.map(item=>{
+    //     x?
+    //     console.log(item.product.title) :
+    //     console.log(item.title)
+    //   })
+    // }
+    // console.log('cart')
+    // consoleLoop(cart, true)
+    // console.log('lineitems')
+    // consoleLoop(checkout.lineItems)
   };
 
   /////////////////////////////////////////////////////////////////

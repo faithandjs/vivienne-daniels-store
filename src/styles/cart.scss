@@ -1,0 +1,197 @@
+@import './colors';
+
+main.cart {
+  max-width: 1000px;
+  margin: auto;
+
+  .cart-list,
+  .checkout {
+    margin: 0 20px;
+  }
+  .box {
+    // background-color: #faebd7;
+    display: flex;
+    margin: 12px 0;
+    width: 100%;
+    .img-box {
+      width: clamp(93.5px, 17vw, 173px);
+      // height: clamp(88px, 17vw, 162px);
+
+      img {
+        object-fit: cover;
+      }
+    }
+    .details {
+      width: 100%;
+      padding: 0 7px 0 9px;
+      .upper {
+        margin: 0.5vw 0 1.5vw;
+        display: flex;
+        align-items: flex-start;
+        width: 100%;
+        justify-content: space-between;
+        h3 {
+          font-size: 1.1rem;
+        }
+        button {
+          font-size: 1.2rem;
+          width: 2.2vw;
+          width: clamp(13px, 2.2vw, 17.7px);
+          height: auto;
+          &:hover {
+            transform: scale(1.2);
+          }
+        }
+      }
+      ul {
+        margin: 1.5vw 0;
+        display: flex;
+        li {
+          font-size: 0.9rem;
+          padding: 2px 5px;
+          margin-right: 10px;
+          font-weight: bold;
+          &:hover {
+            cursor: auto;
+            color: $text !important;
+            background: rgba(0, 0, 0, 0.116);
+          }
+        }
+      }
+      .lower {
+        margin: 1.5vw 0 0.5vw;
+        display: flex;
+        justify-content: space-between;
+        .amount {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+  .checkout {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 1.2rem;
+    // border-top: 1px solid rgb(252, 252, 252);
+    padding: 10px 0;
+    position: sticky;
+    bottom: 0;
+    backdrop-filter: blur(3px);
+    background-color: rgba(255, 255, 255, 0.801);
+    &::after {
+      position: absolute;
+      content: '';
+      top: 0;
+      width: 40%;
+      height: 2px;
+      background-color: rgba(0, 0, 0, 0.116);
+    }
+    .amount {
+      margin-left: 10px;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    button {
+      margin-right: 10px;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 1rem;
+      position: relative;
+      padding: 9px 5vw;
+      color: $text;
+      border: 1px solid rgba(128, 120, 120, 0.596);
+      background-color: unset;
+      &::after {
+        z-index: -1;
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(61, 56, 56, 0.295);
+        filter: blur(3px);
+      }
+      &:hover {
+        transform: translateY(-1px);
+        background-color: hsla(0, 0%, 100%, 0.212);
+        border-color: rgba(255, 88, 138, 0.144);
+      }
+      &:active {
+        transform: translateY(1px);
+      }
+    }
+  }
+
+  .modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0);
+
+    opacity: 0;
+    transform: translateX(-300%);
+    .innerM {
+      transform: translate(-50%, -50%);
+      color: #000;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      border-radius: 3px;
+      width: clamp(270px, 40vw, 400px);
+      height: 140px;
+      padding: 2vw 2vw 0;
+      font-size: 2rem;
+      font-weight: bold;
+      background: rgba(0, 0, 0, 0.19);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid rgba(83, 83, 83, 0.589);
+      .btns {
+        display: flex;
+        justify-content: end;
+        position: absolute;
+        bottom: 2vw;
+        width: calc(100% - 4vw);
+        button {
+          padding: 5px 7px;
+          font-size: 1.1rem;
+          font-weight: bold;
+          color: #000;
+          margin-left: 10px;
+          border-bottom: 1px solid transparent;
+          &:last-child {
+            color: red;
+          }
+          &:hover {
+            border-bottom: 1px solid;
+          }
+          &:active {
+            border-bottom: 1px solid transparent;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 580px) {
+  main.cart {
+    .cart-list,
+    .checkout {
+      max-width: 1000px;
+      margin: auto;
+    }
+    .box {
+      .details {
+        .upper {
+          h3 {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+}

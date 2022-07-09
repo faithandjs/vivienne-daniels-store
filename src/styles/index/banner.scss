@@ -3,7 +3,7 @@ $weLove: rgba(255, 255, 255, 0.827);
 // $weLove: rgba(235, 178, 178, 0.827);
 section.banner {
   padding: 0;
-  height: 90vh;
+  height: 100vh;
   position: relative;
   .img-box {
     width: 100%;
@@ -32,11 +32,8 @@ section.banner {
         font-size: 8vw;
         stroke: $weLove;
         stroke-width: 1px;
-        stroke-dasharray: none;
         stroke-dashoffset: 900;
-        fill:  rgba(255, 255, 255, 0.267);
-        // fill:  rgba(235, 178, 178, 0.267);
-        animation: dash 6s ease-out alternate 1 backwards;
+        fill: rgba(255, 255, 255, 0.267);
       }
     }
   }

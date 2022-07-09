@@ -1,3 +1,17 @@
-
 $background: black;
 $white: white;
+$text: rgb(66, 66, 66);
+$rainbow: linear-gradient(
+  45deg,
+  lightcoral,
+  rgb(249, 252, 73),
+  pink,
+  rgb(88, 174, 255)
+);
+$darker-rainbow: linear-gradient(
+  45deg,
+  rgb(252, 189, 73),
+  rgb(240, 95, 119),
+  rgb(88, 174, 255),
+  rgb(116, 255, 88)
+);

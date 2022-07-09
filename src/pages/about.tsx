@@ -1,9 +1,56 @@
 import Layout from '@/components/Layout';
 import '../styles/about.scss';
+import gsap from 'gsap';
+import { useEffect } from 'react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const About = () => {
+  gsap.registerPlugin(ScrollTrigger);
+   useEffect(() => {
+    let founder = gsap.timeline();
+    if (window.matchMedia('( max-width: 924px)').matches) {
+      let founder = gsap.timeline({
+        scrollTrigger: { trigger: '.img-box', start: 'top 80%' },
+      });
+      founder.fromTo(
+        '.img-box img',
+        {
+          opacity: 0.5,
+          scale: 0.7,
+          // width: '0%',
+          duration: 4,
+          ease: 'linear',
+          delay: 1,
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          // width: '100%',
+          duration: 1,
+        },
+      );
+    } else {
+      founder.fromTo(
+        '.img-box img',
+        { x: '5%', opacity: 0.7, duration: 2, delay: 1 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 2,
+          scale: 1,
+        },
+      );
+    }
+    founder.fromTo(
+      '.img-box p',
+      {
+        opacity: 0,
+      },
+      { opacity: 1 },
+    );
+  });
   return (
-    <Layout page='about'>
+    <Layout page="about">
       <>
         <div className="title about-title">vivienne daniels</div>
         <section className="about-1 about">

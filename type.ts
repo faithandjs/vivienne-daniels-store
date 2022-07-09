@@ -1,3 +1,7 @@
+export interface selectedOptionsProp {
+  name: string;
+  value: string;
+}
 export interface productDetails {
   description: string;
   featuredImage: {
@@ -17,7 +21,17 @@ export interface productDetails {
   };
   tags: string[];
   title: string;
-  variants: { shopifyId: string; displayName?: string }[];
+  variants: {
+    displayName: string;
+    shopifyId: string;
+    selectedOptions: selectedOptionsProp[];
+    id: string;
+    storefrontId: string;
+  }[];
+  variant?: {
+    storefrontId: string;
+    selectedOptions: { name: string; value: string }[];
+  };
 }
 export interface productProp {
   node: productDetails;
@@ -31,4 +45,12 @@ export interface productsProp {
 }
 export interface productCardProp {
   product: productProp;
+  fill?: string;
+  people?: string;
+}
+export interface cartProp {
+  product: productProp;
+  quantity: number;
+  variant: string;
+  shopifyId: string;
 }

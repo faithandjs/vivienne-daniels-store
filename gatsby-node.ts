@@ -27,7 +27,14 @@ exports.createPages = async ({ graphql, actions }) => {
             handle
             title
             variants {
+              shopifyId
+              displayName
               id
+              storefrontId
+              selectedOptions {
+                name
+                value
+              }
             }
             tags
             media {
@@ -47,13 +54,12 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `);
-  console.log(result);
-  result.data.allShopifyProduct.edges.forEach(({ node }) => {
+  result.data.allShopifyProduct.edges.forEach((product) => {
     createPage({
-      path: `/products/${node.handle}`,
+      path: `/products/${product.node.handle}`,
       component: path.resolve(`./src/get-product/product.tsx`),
       context: {
-        product: node,
+        product: product,
       },
     });
   });
