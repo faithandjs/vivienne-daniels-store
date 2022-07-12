@@ -10,9 +10,7 @@
   font-family: 'Cormorant Garamond', serif;
   transition: all;
   &::selection {
-    // background-color: rgb(224, 29, 15);
     background-color:
-    //rgb(208, 88, 255);
       rgb(15, 193, 224);
     color: #ffffff;
   }
@@ -25,6 +23,12 @@ body {
   background-color: rgb(255, 255, 255);
   height: 100vh;
   color: $text;
+}
+@media screen and (max-width: 425px) {
+  html,
+  body {
+    font-size: 14px;
+  }
 }
 #___gatsby,
 #gatsby-focus-wrapper {
@@ -67,8 +71,8 @@ a {
   font-size: 2rem;
   text-transform: uppercase;
   margin: clamp(10px, 3vh, 22px);
-
-  padding: 10px 0;
+  margin-top: 0;
+  padding: calc(10px + clamp(10px, 3vh, 22px)) 0 10px;
   font-weight: 900;
   // font-size: 3rem;
 }
@@ -82,6 +86,7 @@ a {
     transform: translateX(-20%);
     padding: 5px 8px;
     border: 1px solid rgba(114, 110, 110, 0.5);
+    opacity: 0;
     display: none;
     font-size: 0.9rem;
     border-radius: 2px;
@@ -90,7 +95,18 @@ a {
   &:hover {
     .tooltip {
       display: block;
+      opacity: 1;
+      transition: ease-in-out;
+      transition-duration: 0.2;
     }
+  }
+}
+@keyframes tooltip {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 .addToWL {
@@ -223,4 +239,8 @@ $l-r-padding: 2.5vw;
 @media screen and (max-width: 728px) {
   .productItems {
   }
+}
+.empty {
+  text-align: center;
+  width: -webkit-fill-available;
 }

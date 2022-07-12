@@ -11,21 +11,12 @@ interface prop {
 }
 const Layout = ({ children, page }: prop) => {
   gsap.registerPlugin(ScrollTrigger);
-  const { cart } = useStoreContext();
+  const { cart, currentCheckout } = useStoreContext();
 
   useEffect(() => {
-    //   const showMenu = gsap
-    //     .from('header.products, header.wishlist', {
-    //       yPercent: -100,
-    //       paused: true,
-    //       duration: 0.2,
-    //       backgroundColor: 'red',
-    //     })
-    //     .progress(1);
-
     ScrollTrigger.create({
       trigger: 'header',
-      start: 'bottom top',
+      start: '180px top',
       // markers: true,
       endTrigger: 'footer',
       end: 'bottom bottom',
@@ -33,7 +24,7 @@ const Layout = ({ children, page }: prop) => {
       onUpdate: (self) => {
         if (self.direction === -1) {
           gsap
-            .to('header.products, header.about, header.wishlist, header.cart', {
+            .to('header.products, header.wishlist, header.cart', {
               y: 0,
               ease: 'slow(0.7, 0.7, false)',
               paused: true,
@@ -43,7 +34,7 @@ const Layout = ({ children, page }: prop) => {
         }
         if (self.direction === 1) {
           gsap
-            .to('header.products, header.wishlist,header.about,  header.cart', {
+            .to('header.products, header.wishlist,  header.cart', {
               y: '-200%',
               ease: 'power3.in',
               paused: true,
@@ -54,7 +45,30 @@ const Layout = ({ children, page }: prop) => {
         //  ? showMenu.play() : showMenu.reverse();
       },
     });
+    // const tooltip = document.querySelectorAll(
+    //   'tooltip-icon',
+    // );
+    // if (tooltip) {
+    //   console.log(tooltip)
+    //   // tooltip.addEventListener('mouseenter', function () {
+    //   //   gsap.to('.tooltip', {
+    //   //     opacity: 1,
+    //   //     ease: 'sine.out',
+    //   //     duration: 0.7,
+    //   //   });
+    //   // });
+    //   // tooltip.addEventListener('mouseleave', function () {
+    //   //   gsap.to('.tooltip', {
+    //   //     opacity: 0,
+    //   //     ease: 'expo.out',
+    //   //     duration: 0.7,
+    //   //   });
+    //   // });
+    // }
   });
+  const classes =
+    `children ` + (page === 'home' || page === 'about' ? '' : page);
+
   return (
     <>
       <header className={page}>
@@ -91,29 +105,43 @@ const Layout = ({ children, page }: prop) => {
             <li id="cart">
               <span>cart</span>
               <img src="/static/icons/shopping-cart.png" alt="cart icon" />
-              <span className="number" >
-                {cart.length}
+              <span className="number">
+                {currentCheckout ? currentCheckout.lineItems.length : `0`}
               </span>
             </li>
           </Link>
         </ul>
       </header>
-      {children}
-      <footer>
-        {page === 'home' || page === 'about' ? (
-          <div className=" large">
-            <div className="logo">
-              <Link to="/about">vd</Link>
-            </div>
-          </div>
-        ) : (
-          <></>
-        )}
+      <section className={classes}>{children}</section>
+
+      <footer className={page}>
+        <div className=" large">
+          {page === 'home' || page === 'about' ? (
+            <div className="logo">vd</div>
+          ) : (
+            <></>
+          )}{' '}
+          <p>
+            &copy; 2022
+            <a target="_blank" href="https://faithh.netlify.app/">
+              {' '}
+              faith okogbo
+            </a>
+          </p>
+        </div>
         <ul id="contact">
-          <li>faith okogbo</li>
-          <li>instagram</li>
-          <li>twitter</li>
-          <li>email</li>
+          <li>
+            <span>instagram</span>
+            <img src="/static/icons/instagram.png" alt="instagram icon" />
+          </li>
+          <li>
+            <span>twitter</span>
+            <img src="/static/icons/twitter.png" alt="twitter icon" />
+          </li>
+          <li>
+            <span>email</span>
+            <img src="/static/icons/mail.png" alt="mail icon" />
+          </li>
         </ul>
       </footer>
     </>

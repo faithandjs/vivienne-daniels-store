@@ -191,7 +191,6 @@ const Products = ({ data }: productsProp) => {
                       { a: 'chanel' },
                       { a: 'dior' },
                       { a: 'hermes' },
-                      { a: 'prada' },
                     ])}
                   </div>
                 </section>

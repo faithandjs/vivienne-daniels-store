@@ -1,5 +1,5 @@
 .about-title.title {
-  padding: 20px 0;
+  padding: calc(10px + clamp(10px, 3vh, 22px)) 0 20px;
   font-weight: 900;
   font-size: 3rem;
 }
@@ -20,7 +20,7 @@ section.about {
       max-height: 100%;
       height: auto;
       padding-right: 5vw;
-      p{
+      p {
         text-align: end;
         text-transform: capitalize;
         font-size: 1.1rem;
@@ -89,8 +89,19 @@ section.about {
     }
   }
 }
+@media screen and (max-width: 425px) {
+  section.about {
+    &.quote {
+      font-size: 1.5rem !important;
+      text-transform: lowercase;
+    }
+  }
+}
 @media screen and (max-width: 924px) {
   section.about {
+    &.quote {
+      font-size: 1.6rem;
+    }
     &.about-1 {
       display: block;
       width: 100%;
@@ -114,20 +125,6 @@ section.about {
         }
       }
     }
-    &.about-2 {
-      p {
-        &:first-child {
-          // padding-right: 15px;
-        }
-        &:last-child {
-          // padding-left: 15px;
-        }
-      }
-    }
-  }
-}
-@media screen and (max-width: 924px) {
-  section.about {
     &.about-2 {
       display: block;
       p {

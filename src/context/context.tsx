@@ -7,7 +7,7 @@ import {
   useState,
 } from 'react';
 import Client from 'shopify-buy';
-import { productProp, cartProp } from '../../type';
+import { productProp, cartProp, productDetails } from '../../type';
 interface contextProp {
   children: JSX.Element;
 }
@@ -27,7 +27,6 @@ export const Context = ({ children }: contextProp) => {
   const shopifyWishlist = 'shopify-wishlist';
   const [checkoutID, setCheckoutID] = useState<any>();
   const [currentCheckout, setCurrentCheckout] = useState<any>('');
-  const [cart, setCart] = useState<cartProp[]>([]);
   const [wishlist, setWishlist] = useState<productProp[]>([]); //productProp[]
   const initialSet = useRef(false);
 
@@ -48,16 +47,9 @@ export const Context = ({ children }: contextProp) => {
     }
     setCurrentCheckout(checkout);
   };
-  const savingCartAndWishlist = (
-    savecart: any = cart,
-    savewishlist: any = wishlist,
-  ) => {
-    localStorage.setItem(shopifyCart, JSON.stringify(savecart));
+  const savingWishlist = (savewishlist: any = wishlist) => {
     localStorage.setItem(shopifyWishlist, JSON.stringify(savewishlist));
     //
-  };
-  const settingCart = (cartItem: cartProp) => {
-    setCart([...cart, cartItem]);
   };
   const gettingCheckoutID = async () => {
     try {
@@ -73,9 +65,7 @@ export const Context = ({ children }: contextProp) => {
 
       if (oldCheckoutId) {
         setCheckoutID(oldCheckoutId);
-        if (oldCart.length > 1) setCart(oldCart);
         if (oldWishlist.length > 1) setWishlist(oldWishlist);
-        savingCartAndWishlist(oldCart, oldWishlist);
         await client.checkout.fetch(oldCheckoutId).then((checkout) => {
           settingCheckout(checkout);
         });
@@ -83,7 +73,6 @@ export const Context = ({ children }: contextProp) => {
         await client.checkout.create().then((checkout) => {
           settingCheckout(checkout);
         });
-        savingCartAndWishlist([], wishlist);
       }
     } catch (e) {
       console.log(e);
@@ -95,19 +84,11 @@ export const Context = ({ children }: contextProp) => {
       passed.current = true;
     }
   }, [typeof checkoutID === 'undefined']);
-
   useEffect(() => {
     if (initialSet.current) {
-      savingCartAndWishlist();
-      console.log(
-        'cart length',
-        cart.length,
-        'chekout item length',
-        currentCheckout.lineItems,
-      );
-      console.log('wishlist', wishlist);
+      savingWishlist();
     }
-  }, [cart, wishlist, currentCheckout]);
+  }, [wishlist, currentCheckout]);
 
   const addToCart = async ({
     product,
@@ -133,65 +114,8 @@ export const Context = ({ children }: contextProp) => {
         .then((checkout) => {
           settingCheckout(checkout);
         });
-
-      if (cart.length > 0) {
-        const inCart = cart.find((obj) => obj.variant === variant);
-        if (inCart) {
-          let oldQuantity = inCart.quantity;
-          let newQuantity = quantity;
-          const newObject = { ...inCart, quantity: oldQuantity + newQuantity };
-          const remainder = cart.filter((obj) => obj.variant !== variant);
-          setCart(remainder.concat(newObject));
-        } else {
-          settingCart({ product, quantity, variant, shopifyId });
-        }
-      } else {
-        settingCart({ product, quantity, variant, shopifyId });
-      }
     } catch (e) {
       console.log('add to cart error', e);
-    }
-  };
-
-  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>..
-  const deleteFromCart = async (item: any) => {
-    if (!initialSet.current) initialSet.current = true;
-    // console.log(items)
-    // return
-    const lineItemIdsToRemove: string[] = [item.variant];
-    // console.log(
-    //   lineItemIdsToRemove,
-    //   checkoutID,
-    //   currentCheckout.lineItems.length,
-    //   cart.length,
-    // );
-    if (currentCheckout.lineItems < 1) {
-      console.log('cart empty');
-      return;
-    }
-    // items.map((item) => {
-    //   const includes = currentCheckout.lineItems.find((innerItem:any)=> innerItem.shopifyId === );
-    //   includes ? lineItemIdsToRemove.push(item) : console.log('not in cart');
-    // });
-    console.log(lineItemIdsToRemove, currentCheckout.lineItems);
-    try {
-      await client.checkout
-        .removeLineItems(checkoutID, lineItemIdsToRemove)
-        .then((checkout) => {
-          // console.log(checkout.lineItems);
-          console.log('it worked?');
-          settingCheckout(checkout);
-        })
-        .then(() => {
-          // let newCart = cart;
-          // items.map((item) => {
-          //   const result = newCart.filter((x) => x.variant !== item);
-          //   newCart = result;
-          // });
-          // console.log(newCart);
-        });
-    } catch (e) {
-      console.log(e);
     }
   };
   const editWishlist = (product: productProp) => {
@@ -211,23 +135,46 @@ export const Context = ({ children }: contextProp) => {
     setWishlist(tempWL);
     return;
   };
-  //add to cart!!!!!!!!!!!!!!!!!!!!!!!
-  //delete from cart
-  //add to wishlist
-  //updating cart when an increased number of items is added
+
+  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>..
+  const deleteFromCart = async (lineItemIdsToRemove: string[]) => {
+    if (!initialSet.current) initialSet.current = true;
+
+    // const lineItemIdsToRemove: any = [item];
+    if (currentCheckout.lineItems < 1) {
+      console.log('cart empty');
+      return;
+    }
+    try {
+      await client.checkout
+        .removeLineItems(checkoutID, lineItemIdsToRemove)
+        .then((checkout) => {
+          // console.log(checkout.lineItems);
+          console.log('it worked?');
+          settingCheckout(checkout);
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   //test checkout attributes
   //check numbers
-  console.log('context');
-  cart.map((item) => {
-    console.log(item.product.node.handle);
-  });
+  // console.log('context  >>>>>>>>>>>>>>>>>>>>>>>');
+  // wishlist.map((item) => {
+  //   console.log(item.node.handle);
+  // });
+
+  // console.log('context  >>>>>>>>>>>>>>>>>>>>>>>');
+  // cart.map((item) => {
+  //   console.log(item.product.node.handle);
+  // });
   const value = useMemo(
     () => ({
       addToCart,
       passed,
       deleteFromCart,
-      cart,
+      currentCheckout,
       editWishlist,
       wishlist,
       setfilling,
@@ -235,10 +182,10 @@ export const Context = ({ children }: contextProp) => {
     [
       addToCart,
       deleteFromCart,
+      currentCheckout,
       passed,
-      cart,
       editWishlist,
-      wishlist,
+      wishlist.reverse(),
       setfilling,
     ],
   );

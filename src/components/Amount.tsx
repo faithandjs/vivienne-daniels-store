@@ -1,6 +1,6 @@
 import React from 'react';
 interface prop {
-  amount: number;
+  amount: number|string;
 }
 const Amount = ({ amount }: prop) => {
   return (

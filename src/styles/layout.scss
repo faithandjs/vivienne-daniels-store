@@ -1,16 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Jacques+Francois+Shadow&display=swap');
 @import 'colors';
+@import './mixin';
 @mixin undelinePage($page) {
   ##{$page}::before {
     height: 2px;
     background-image: $rainbow;
   }
 }
-
+$header_height: 100px;
+$footer_height: 55px;
 header,
 footer {
-  z-index: 3;
-  background-color: $background;
+  z-index: 12;
+  // background-color: $background;
   color: $white;
   display: flex;
   width: 100%;
@@ -24,6 +26,61 @@ footer {
       text-transform: lowercase;
       font-style: italic;
       position: relative;
+
+      span {
+        display: block;
+      }
+      img {
+        display: none;
+      }
+    }
+  }
+}
+.logo {
+  font-family: 'Jacques Francois Shadow', cursive;
+  a {
+    font-family: 'Jacques Francois Shadow', cursive;
+  }
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+header {
+  background: $background;
+  position: sticky;
+  top: 0;
+  height: $header_height;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  padding: 0 20px;
+
+  .links {
+    display: flex;
+    justify-content: center;
+    li {
+      // span {
+      //   display: block;
+      // }
+      // img {
+      //   display: none;
+      // }
+      &#cart {
+        position: relative;
+        .number {
+          position: absolute;
+          font-size: 0.9rem;
+          top: -5px;
+          right: -12px;
+          width: 1.25rem;
+          height: 1.25rem;
+          border-radius: 50%;
+          background-color: rgb(255, 64, 64);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
       &::before {
         content: '';
         position: absolute;
@@ -48,9 +105,11 @@ footer {
     @include undelinePage('home');
   }
   &.about {
+    position: relative;
     @include undelinePage('about');
   }
-  &.products {
+  &.products,
+  &.none {
     @include undelinePage('products');
   }
   &.wishlist {
@@ -59,83 +118,76 @@ footer {
   &.cart {
     @include undelinePage('cart');
   }
-}
-.logo {
-  a {
-    font-family: 'Jacques Francois Shadow', cursive;
+  &.none {
+    position: relative;
   }
-  font-size: 2rem;
-  text-transform: uppercase;
 }
-header {
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  height: 100px;
-  width: 100%;
-  align-items: center;
+.children.wishlist,
+.children.cart,
+.children.products,
+.children.none,
+.products-and-menu,
+section.cart {
+  min-height: calc(100vh - ($header_height + $footer_height));
+}
+footer {
+  height: $footer_height;
+  background-color: $background-footer;
   justify-content: space-between;
-  font-size: 1.2rem;
-  padding: 0 20px;
-
-  .links {
-    display: flex;
-    justify-content: center;
-    li {
-      span {
-        display: block;
-      } 
-      img {
-        display: none;
-      }
-      &#cart {
-        position: relative;
-        .number{
-          position: absolute;
-          font-size: .9rem;
-          top: -5px;
-          right: -12px;
-          width: 1.25rem;
-          height: 1.25rem;
-          border-radius: 50%;
-          background-color: rgb(255, 64, 64);
-          display: flex;
-          justify-content: center;
-          align-items: center;
+  align-items: center;
+  font-size: 0.9rem;
+  padding: 0 clamp(80px, 15vw, 204px);
+  .large {
+    p {
+      a {
+        font-size: 0.85rem;
+        &:hover {
+          @include clipText;
         }
       }
     }
   }
-}
-footer {
-  // height: 50px;
-  justify-content: space-between;
-  align-items: flex-end;
-  // padding: 0 20vw 2vh;
-  font-size: 0.9rem;
-  // background-color: $background;
-  // position: absolute;
-  // bottom: 0;
   ul {
-    // justify-content: ;
+    li {
+      &:hover {
+        @include clipText;
+      }
+    }
   }
-  .large {
-    .logo {
-      font-size: 9rem;
+  &.about,
+  &.home {
+    padding: 0 5vw;
+    height: max-content;
+    .large {
+      p {
+        text-align: center;
+      }
+      .logo {
+        font-size: 6rem;
+      }
+    }
+    ul {
+      display: block;
+      li {
+        margin: 2vw;
+      }
     }
   }
 }
 @keyframes underline {
 }
 @media screen and (max-width: 500px) {
-  header {
+  header,
+  footer {
+    // footer
+
     padding: 0 3vw;
     .logo {
       font-size: 10vw;
     }
-    .links {
+    ul {
       li {
-        width: 6.5vw;
+        width: 6.2vw;
         margin: 0 3vw;
         span {
           display: none;
@@ -145,6 +197,33 @@ footer {
         }
         &::before {
           bottom: -5px;
+        }
+      }
+    }
+  }
+  footer {
+    padding: 0 4vw;
+    ul {
+      li {
+        width: 5.5vw;
+        margin: 0 2.5vw;
+      }
+    }
+
+    &.about,
+    &.home {
+      // padding: 0 5vw;
+      .large {
+        p {
+        }
+        .logo {
+          // font-size: 6rem;
+        }
+      }
+      ul {
+        display: flex;
+        li {
+          margin: 0 2.5vw;
         }
       }
     }

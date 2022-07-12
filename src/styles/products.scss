@@ -134,7 +134,7 @@ $l-r-padding: 2.5vw;
     .showing {
       // position: absolute;
       top: 2vh;
-      padding: 0 $l-r-padding 0;
+      padding: calc(10px + clamp(10px, 3vh, 22px)) $l-r-padding 0;
       &.text {
         font-size: 1.3rem;
         text-align: start;
@@ -153,6 +153,14 @@ $l-r-padding: 2.5vw;
       position: relative;
       .product-card {
         width: calc(30% + 0px);
+        h3{
+          text-transform: capitalize;}
+        .img-box {
+          height: 23vw;
+          img {
+            object-position: bottom;
+          }
+        }
       }
     }
   }
@@ -170,11 +178,12 @@ $l-r-padding: 2.5vw;
 
     .search-box {
       width: fit-content;
-      height: -webkit-fill-available;
+      // height: -webkit-fill-available;
       z-index: 10;
       position: absolute;
       left: 0;
       bottom: 0;
+      top: 0;
       transform: translateX(-100%);
       .search {
         .x {

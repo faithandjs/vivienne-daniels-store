@@ -5,6 +5,9 @@
       height: 30vw;
     }
     .details {
+      h4 {
+        text-transform: capitalize;
+      }
       .flex {
         display: flex;
         align-items: baseline;
@@ -12,7 +15,8 @@
         .hearts {
           display: flex;
           align-items: baseline;
-          p{}
+          p {
+          }
           .addToWL {
             width: 25px;
           }
@@ -24,9 +28,13 @@
 @media screen and (max-width: 1011px) {
   .WL-list.productItems {
     .product-card {
+      // width: calc(30% + 0px);
       width: calc(50% - 5vw);
       .img-box {
-        height: 35vw;
+        height: 40vw;
+        img {
+          object-position: bottom;
+        }
       }
     }
   }

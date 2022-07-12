@@ -1,19 +1,19 @@
 import Layout from '@/components/Layout';
 import '../styles/wishlist.scss';
 import useStoreContext from '@/context/context';
-import { productCardProp, productProp } from 'type';
+import {  productProp } from 'type';
 import { WishlistCard } from '@/components/WishListCard';
 
 const Wishlist = () => {
-  const { editWishlist, wishlist, setfilling } = useStoreContext();
-  const reverse = wishlist.reverse();
+  const { wishlist, setfilling } = useStoreContext();
+
   return (
     <Layout page="wishlist">
       <>
         <div className="title">Wishlist</div>
         <ul className="WL-list productItems">
           {wishlist.length > 0 ? (
-            reverse.map((item: productProp, index: number) => {
+            wishlist.map((item: productProp, index: number) => {
               let fill = setfilling(item.node.title);
               let num = Math.round(Math.random() * 50) / 10;
               let people = String(num) + 'k';
@@ -27,7 +27,7 @@ const Wishlist = () => {
               );
             })
           ) : (
-            <div className="no-WL">your wishlist is empty</div>
+            <div className="empty">your wishlist is empty</div>
           )}
         </ul>
       </>

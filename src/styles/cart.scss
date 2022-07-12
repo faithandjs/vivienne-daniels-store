@@ -1,12 +1,15 @@
 @import './colors';
 
-main.cart {
+section.cart {
   max-width: 1000px;
   margin: auto;
 
   .cart-list,
   .checkout {
     margin: 0 20px;
+  }
+  .cart-list {
+    padding-top: 6vh;
   }
   .box {
     // background-color: #faebd7;
@@ -15,7 +18,7 @@ main.cart {
     width: 100%;
     .img-box {
       width: clamp(93.5px, 17vw, 173px);
-      // height: clamp(88px, 17vw, 162px);
+      height: clamp(88px, 17vw, 162px);
 
       img {
         object-fit: cover;
@@ -32,6 +35,7 @@ main.cart {
         justify-content: space-between;
         h3 {
           font-size: 1.1rem;
+          text-transform: capitalize;
         }
         button {
           font-size: 1.2rem;
@@ -63,7 +67,11 @@ main.cart {
         display: flex;
         justify-content: space-between;
         .amount {
-          font-size: 1.2rem;
+          font-size: 1.1rem;
+          &:last-child {
+            font-weight: bold;
+            font-size: 1.3rem;
+          }
         }
       }
     }
@@ -178,7 +186,7 @@ main.cart {
   }
 }
 @media screen and (max-width: 580px) {
-  main.cart {
+  section.cart {
     .cart-list,
     .checkout {
       max-width: 1000px;

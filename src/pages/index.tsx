@@ -17,6 +17,7 @@ export default function Home({ data }: any) {
   const { media, priceRangeV2, title } = data.shopifyProduct;
   const products = data.allShopifyProduct.edges;
   const allTags = useRef<string[]>([]);
+  let scrolled = false;
   const rollingArr = [
     'louis vuitton',
     'yves saint laurent',
@@ -105,7 +106,6 @@ export default function Home({ data }: any) {
           backgroundColor: 'rgba(0, 0, 0, 0.11)',
         });
     } else {
-      console.log('else');
       // gsap.fromTo(
       //   'header.home',
       //   {
@@ -127,67 +127,46 @@ export default function Home({ data }: any) {
     passed.current = true;
   });
   useEffect(() => {
-    gsap.set;
-    const showMenu = gsap
-      // .timeline()
-      // .to('header.home', {
-      //   backgroundColor: 'rgba(0, 0, 0, 1)',
-      // })
-      .from('header.home', {
-        yPercent: -100,
-        paused: true,
-        duration: 0.3,
-        // backgroundColor: 'rgba(0, 0, 0, 0.11)',
-      })
-      .progress(1);
-    // const changeColor = gsap.fromTo(
-    //   'header.home',
-    //   {
-    //     backgroundColor: 'rgba(0, 0, 0, .11)',
-    //   },
-    //   {
-    //     backgroundColor: 'rgba(0, 0, 0, .8)',duration: .4
-    //   },
-    // );
     ScrollTrigger.create({
       trigger: '.banner .img-box',
       start: 'bottom top',
       endTrigger: 'footer',
       end: 'bottom bottom',
       onUpdate: (self) => {
-        console.log(self);
         if (self.direction === -1) {
-          showMenu.play();
-          // changeColor.play();
-          gsap.to(
-            'header.home',
-            // {
-            //   backgroundColor: 'rgba(0, 0, 0, .11)',
-            // },
-            {
-              backgroundColor: 'rgba(0, 0, 0, .8)',
-              duration: 0.4,
-            },
-          );
-        } else {
-          showMenu.reverse();
-          // changeColor.reverse();
           gsap
-            .from(
-              'header.home',
-              {
-                backgroundColor: 'rgba(0, 0, 0, .11)',
-              },
-              // {
-              //   backgroundColor: 'rgba(0, 0, 0, .8)',
-              //   duration: 0.4,
-              // },
-            )
-            .reverse();
+            .to('header.home', {
+              yPercent: 0,
+              paused: true,
+              duration: 0.3,
+              backgroundColor: '#000',
+            })
+            .progress(1);
+        } else {
+          scrolled = true;
+          gsap
+            .to('header.home', {
+              yPercent: -100,
+              paused: true,
+              duration: 0.3,
+              backgroundColor: '#000',
+            })
+            .progress(1);
         }
       },
     });
+//doesnt work
+    scrolled &&
+      gsap.to('header.home', {
+        backgroundColor: 'rgba(0, 0, 0, .11)',
+        scrollTrigger: {
+          trigger: '.banner .img-box',
+          start: 'bottom 70px',
+          // start: 'top top',
+        },
+      });
   });
+
   useEffect(() => {
     // window.scrollY
   });
@@ -197,13 +176,13 @@ export default function Home({ data }: any) {
     const list1 = document.querySelector('ul.two')!;
     const item = document.querySelectorAll('ul.images li');
     let listWidth = 12;
-    console.log('listWidth', listWidth);
+    // console.log('listWidth', listWidth);
     item.forEach((li) => {
-      console.log('listWidth', listWidth, 'li.clientWidth', li.clientWidth);
+      // console.log('listWidth', listWidth, 'li.clientWidth', li.clientWidth);
       listWidth = listWidth + li.clientWidth + 5;
-      console.log('listWidth', listWidth, 'li.clientWidth', li.clientWidth);
+      // console.log('listWidth', listWidth, 'li.clientWidth', li.clientWidth);
     });
-    console.log(listWidth);
+    // console.log(listWidth);
 
     const roll = gsap.timeline({
       force3D: true,
@@ -395,7 +374,7 @@ export const query = graphql`
         }
       }
     }
-    shopifyProduct(title: { eq: "VERSACE MEDUSA AEVITAS PLATFORM PUMPS" }) {
+    shopifyProduct(title: { eq: "Medusa Aevitas platform pumps" }) {
       media {
         preview {
           image {
@@ -412,3 +391,20 @@ export const query = graphql`
     }
   }
 `;
+// export const pageQuery = graphql`
+//   query {
+//     blogPost(id: { eq: $Id }) {
+//       title
+//       body
+//       author
+//       avatar {
+//         childImageSharp {
+//           gatsbyImageData(
+//             width: 200
+//             placeholder: BLURRED
+//             formats: [AUTO, WEBP, AVIF]
+//           )
+//         }
+//       }
+//     }
+//   }`
