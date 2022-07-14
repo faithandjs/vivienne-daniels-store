@@ -10,8 +10,7 @@
   font-family: 'Cormorant Garamond', serif;
   transition: all;
   &::selection {
-    background-color:
-      rgb(15, 193, 224);
+    background-color: rgb(15, 193, 224);
     color: #ffffff;
   }
 }
@@ -65,6 +64,8 @@ img {
 a {
   color: unset;
   text-decoration: none;
+  max-width: max-content;
+  max-height: max-content;
 }
 .title {
   text-align: center;
@@ -74,32 +75,6 @@ a {
   margin-top: 0;
   padding: calc(10px + clamp(10px, 3vh, 22px)) 0 10px;
   font-weight: 900;
-  // font-size: 3rem;
-}
-.tooltip-parent {
-  position: relative;
-  .tooltip {
-    position: absolute;
-    bottom: calc(100% + 5px);
-    left: 0;
-    background-color: white;
-    transform: translateX(-20%);
-    padding: 5px 8px;
-    border: 1px solid rgba(114, 110, 110, 0.5);
-    opacity: 0;
-    display: none;
-    font-size: 0.9rem;
-    border-radius: 2px;
-    white-space: nowrap;
-  }
-  &:hover {
-    .tooltip {
-      display: block;
-      opacity: 1;
-      transition: ease-in-out;
-      transition-duration: 0.2;
-    }
-  }
 }
 @keyframes tooltip {
   from {
@@ -113,7 +88,6 @@ a {
   width: 30px;
   padding: 3px;
   transform: translateY(5px);
-  // color: #fc0000e7;
   .tooltip {
     left: unset;
     right: 0;
@@ -159,24 +133,11 @@ $l-r-padding: 2.5vw;
     height: max-content;
     background-color: white;
     margin: 3vh 1vw;
-    // position: relative;
     position: relative;
     &:hover,
     a:hover {
       .img-box {
         position: relative;
-        // &::after {
-        //   content: 'kkkkjhsdhsdh';
-        //   width: 101%;//;calc(100% + 12px);
-        //   height: 101%;// calc(100% + 12px);
-        //   top: 50%;
-        //   left: 50%;
-        //   transform: translate(-50%, -50%);
-        //   background-color: rgb(161, 161, 161);
-        //   position: absolute;
-        //   z-index: -1;
-        //   // padding: 10px;
-        // }
       }
       .details {
         h3,
@@ -216,28 +177,9 @@ $l-r-padding: 2.5vw;
           text-transform: uppercase;
           font-weight: bold;
           font-size: 1.2rem;
-          &:first-child {
-            // font-size: 0.85rem;
-          }
-          &:last-child {
-          }
         }
       }
     }
-  }
-}
-// // @media screen and (max-width: 1011px) {
-// //   .productItems {
-// //     .product-card {
-// //       width: calc(50% - 5vw);
-// //       .img-box {
-// //         height: 35vw;
-// //       }
-// //     }
-// //   }
-// // }
-@media screen and (max-width: 728px) {
-  .productItems {
   }
 }
 .empty {

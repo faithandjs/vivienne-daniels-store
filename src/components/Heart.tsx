@@ -6,12 +6,12 @@ const Heart = ({ product, fill }: productCardProp) => {
   const { editWishlist } = useStoreContext();
   return (
     <div
-      className="addToWL tooltip-parent"
+      className="addToWL"
       onClick={() => {
         editWishlist(product);
       }}
+      title='add to wishlist'
     >
-      <span className="tooltip">add to wishlist</span>
       <svg viewBox="0 0 40 40">
         <path
           fill={fill}

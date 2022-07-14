@@ -63,14 +63,6 @@ section.about {
 @media screen and (max-width: 968px) {
   section.about {
     &.about-1 {
-      // max-height: 800px;
-      .img-box {
-        // position: absolute;
-        // right: 0;
-        //   width: 60%;
-        // width: clamp(580px, 60%, 800px);
-        //max-height: 100%;
-      }
       .text {
         width: 100%;
         z-index: 1;

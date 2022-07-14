@@ -24,31 +24,7 @@ interface prop {
 const Cart = () => {
   const { deleteFromCart, currentCheckout } = useStoreContext();
   const [currentI, setCurrentI] = useState<string[]>();
-  // const selected = useRef<string[]>([]);
-  console.log(currentCheckout.lineItems);
-  const calculateTotal = () => {
-    let total: number = 0;
-    currentCheckout.lineItems.map((item: prop) => {
-      console.log(item);
-      const amnt = Number(item.variant.price) * item.quantity;
-      total = total + amnt;
-    });
-    return total;
-  };
-  // const settingSelected = (id: string) => {
-  //   let arr: string[] = [];
-  //   if (selected.current.length > 0) {
-  //     if (selected.current.includes(id)) {
-  //       arr = selected.current.filter((line) => line !== id);
-  //     } else {
-  //       arr = [...selected.current, id];
-  //     }
-  //   } else {
-  //     arr = [id];
-  //   }
-  //   console.log(arr);
-  //   selected.current = arr;
-  // };
+
   const CartCard = ({ id, quantity, variant, title }: prop) => {
     return (
       <div className="box">
@@ -64,28 +40,17 @@ const Cart = () => {
         </Link>
         <div className="details">
           <div className="upper">
-            <h3
-              onClick={() => {
-                console.log('selected.current');
-                // settingSelected(id);
-              }}
-            >
-              {title}
-            </h3>
+            <h3>{title}</h3>
 
             <button
               type="button"
               onClick={(e) => {
-                // if (selected.current.length === 0) {
-                console.log(title);
                 setCurrentI([id]);
-                console.log('clicked the x button');
                 gsap.to('.modal', {
                   x: '0%',
                   opacity: 1,
                   ease: 'power1.out',
                 });
-                // }
               }}
             >
               <img src="/static/icons/close.png" alt="close icon" />
@@ -132,7 +97,7 @@ const Cart = () => {
         {currentCheckout ? (
           currentCheckout.lineItems.length > 0 && (
             <div className="checkout">
-              <Amount amount={calculateTotal()}></Amount>
+              <Amount amount={currentCheckout.totalPriceV2.amount}></Amount>
               <button>checkout</button>
             </div>
           )

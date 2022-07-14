@@ -4,7 +4,6 @@
 $l-r-padding: 2.5vw;
 
 .products-and-menu {
-  // $text: #fff;
   display: flex;
   width: 100%;
   .search-box {
@@ -16,7 +15,6 @@ $l-r-padding: 2.5vw;
     border-right: 1px solid rgba(255, 255, 255, 1);
 
     .search {
-      // width: ;
       padding: 0 0 5vh;
       position: sticky;
       top: 0;
@@ -27,7 +25,6 @@ $l-r-padding: 2.5vw;
         display: flex;
         input,
         button {
-          // color: #fff;
           height: 45px;
           color: $text;
         }
@@ -53,10 +50,8 @@ $l-r-padding: 2.5vw;
       }
       .options {
         z-index: 2;
-        // position: absolute;
         padding: 0 0 5vh;
         background-color: inherit;
-        // width: 100%;
         section {
           margin: 25px 0;
           p {
@@ -69,11 +64,8 @@ $l-r-padding: 2.5vw;
             button {
               font-size: 1.05rem;
               color: #000;
-
-              // color: $text;
               margin: 5px;
               padding: 5px 7px;
-              // border: 1px solid rgba(124, 124, 124, 0.649);
               &:hover {
                 @include clipText;
                 cursor: pointer;
@@ -86,7 +78,6 @@ $l-r-padding: 2.5vw;
       .x {
         display: none;
         padding: 5px;
-        // font-size: 2rem;
         align-items: center;
         justify-content: center;
         div {
@@ -119,20 +110,11 @@ $l-r-padding: 2.5vw;
     left: -1.9vw;
     transform: rotate(0.25turn) translateY(100%) scale(0.5);
     padding: 1.5vw;
-
     width: 8vw;
-    // &:hover {
-    //   cursor: pointer;
-    //   left: -1.3vw;
-    //   border-radius: 3px;
-    //   border: 1px solid rgba(153, 153, 153, 0.411);
-    //   // scale(.5);
-    // }
   }
   .main {
     width: 75%;
     .showing {
-      // position: absolute;
       top: 2vh;
       padding: calc(10px + clamp(10px, 3vh, 22px)) $l-r-padding 0;
       &.text {
@@ -145,16 +127,14 @@ $l-r-padding: 2.5vw;
           font-style: italic;
         }
       }
-      &.title {
-      }
     }
     .productItems {
-      // z-index: 2;
       position: relative;
       .product-card {
         width: calc(30% + 0px);
-        h3{
-          text-transform: capitalize;}
+        h3 {
+          text-transform: capitalize;
+        }
         .img-box {
           height: 23vw;
           img {
@@ -178,7 +158,6 @@ $l-r-padding: 2.5vw;
 
     .search-box {
       width: fit-content;
-      // height: -webkit-fill-available;
       z-index: 10;
       position: absolute;
       left: 0;
@@ -204,45 +183,14 @@ $l-r-padding: 2.5vw;
     }
     .main {
       width: 100%;
-      // .showing {
-      //   // position: relative;
-      //   // top: 2vh;
-      //   // padding: 0 $l-r-padding 0;
-      //   // width: 100%;
-      //   &.text {
-      //     font-size: 1.3rem;
-      //     text-align: start;
-      //     span {
-      //       font-weight: bold;
-      //       font-style: italic;
-      //     }
-      //   }
-      //   &.title {
-      //   }
-      // }
       .productItems {
         .product-card {
           width: calc(50% - 5vw);
           .img-box {
             height: 40vw;
-            img {
-              // object-position: 0px -2px;
-            }
           }
         }
       }
     }
   }
 }
-
-// @media screen and (max-width: 300px) {
-//   .productItems {
-
-//     .product-card {
-//       width: calc(50% - 4vw);
-//       .img-box {
-//         height: 250px;
-//       }
-//     }
-//   }
-// }

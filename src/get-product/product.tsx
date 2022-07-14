@@ -1,12 +1,13 @@
 import Layout from '@/components/Layout';
 import { useEffect, useRef, useState } from 'react';
-import { productCardProp, productDetails, productProp } from 'type';
+import { productDetails, productProp } from 'type';
 import useStoreContext from '@/context/context';
 import Heart from '../components/Heart';
 import '../styles/product.scss';
 import Amount from '@/components/Amount';
 import { graphql } from 'gatsby';
 import ProductCard from '@/components/ProductCard';
+import { navigate } from 'gatsby';
 
 interface prop {
   pageContext: { product: productProp };
@@ -18,7 +19,6 @@ interface prop {
 }
 const Product = ({ pageContext, data }: prop) => {
   const { addToCart, setfilling } = useStoreContext();
-
   const {
     description,
     featuredImage,
@@ -36,7 +36,6 @@ const Product = ({ pageContext, data }: prop) => {
   const [namesArray, setNamesArray] = useState<string[]>([]);
   const [quantity, setQuantity] = useState<number>(1);
   const fill = setfilling(title);
-  console.log(data);
   const tag = useRef(tags[Math.round(Math.random() * (tags.length - 1))]);
   const recommendedArray = useRef<productProp[]>([]);
   const settingOptions = () => {
@@ -82,10 +81,8 @@ const Product = ({ pageContext, data }: prop) => {
       });
 
       if (filtered.length === 1) {
-        const product = pageContext.product;
         const variant = filtered[0].variant;
-        const shopifyId = filtered[0].shopifyId;
-        addToCart({ product, quantity, variant, shopifyId });
+        addToCart({ quantity, variant });
       }
     } else {
       console.log('select all options');
@@ -133,8 +130,7 @@ const Product = ({ pageContext, data }: prop) => {
     let holder: string[] = [];
     variants![0].selectedOptions.map((item) => holder.push(item.name));
     setNamesArray(holder);
-    console.log('tag', tag.current);
-    //fpr recommended
+
     data.allShopifyProduct.edges.map((item, index) => {
       if (item.node.tags.includes(tag.current)) {
         if (index === 0) {
@@ -145,7 +141,6 @@ const Product = ({ pageContext, data }: prop) => {
         recommendedArray.current = temp;
       }
     });
-    console.log('recommendedArray.current', recommendedArray.current?.length);
   }, []);
   useEffect(() => {
     if (options.length < 1) {
@@ -177,10 +172,6 @@ const Product = ({ pageContext, data }: prop) => {
           newTwo?.setAttribute('class', 'img-box two');
         } else {
           const newTwo = arrayV.at(0);
-          // one?.removeAttribute('class');
-          // // one?.setAttribute('class', 'img-box');
-          // two?.removeAttribute('class');
-          // two?.setAttribute('class', 'img-box one');
           newTwo?.removeAttribute('class');
           newTwo?.setAttribute('class', 'img-box two');
         }
@@ -280,26 +271,31 @@ const Product = ({ pageContext, data }: prop) => {
                 </div>
               );
             })}
-            <ul className="list">
-              {media.length > 1 &&
-                media.map((item, index) => {
-                  if (index < 4) {
-                    return (
-                      <li
-                        key={index}
-                        onClick={() => {
-                          navigate(index);
-                        }}
-                      >
-                        <img
-                          src={item.preview.image.src}
-                          alt={`another image of ${title}`}
-                        />
-                      </li>
-                    );
-                  }
-                })}
-            </ul>
+            <div className="abs">
+              {/* <button className="navigation" onClick={() => navigate(-1)}>
+                <img src="/static/icons/back-arrow.png" alt="" />
+              </button> */}
+              <ul className="list">
+                {media.length > 1 &&
+                  media.map((item, index) => {
+                    if (index < 4) {
+                      return (
+                        <li
+                          key={index}
+                          onClick={() => {
+                            navigate(index);
+                          }}
+                        >
+                          <img
+                            src={item.preview.image.src}
+                            alt={`another image of ${title}`}
+                          />
+                        </li>
+                      );
+                    }
+                  })}
+              </ul>
+            </div>
           </div>
 
           <section className="details">
@@ -341,12 +337,37 @@ const Product = ({ pageContext, data }: prop) => {
                         item.title.toLowerCase() === 'color'
                           ? (returnee = (
                               <li
-                                className={`color tooltip-parent ${innerItem.replaceAll(
+                                className={`color ${innerItem.replaceAll(
                                   ' ',
                                   '',
                                 )}`}
                                 key={index}
                                 onClick={() => {
+                                  let temp: productDetails['variants'] = [];
+                                  variants.map((item) => {
+                                    item.selectedOptions.map((newInnerItem) => {
+                                      if (
+                                        newInnerItem.name.toLowerCase() ===
+                                        'color'
+                                      ) {
+                                        if (newInnerItem.value === innerItem) {
+                                          temp = [...temp, item];
+                                        }
+                                      }
+                                    });
+                                  });
+
+                                  const allImgs = document.querySelectorAll(
+                                    '.images .img-box img',
+                                  );
+                                  allImgs.forEach((item, index) => {
+                                    if (
+                                      item.getAttribute('src') ===
+                                      temp[0].image.src
+                                    ) {
+                                      navigate(index);
+                                    }
+                                  });
                                   setSelected({
                                     ...selected,
                                     [`${item.title}`]: innerItem,
@@ -357,9 +378,8 @@ const Product = ({ pageContext, data }: prop) => {
                                     colors[newItem as keyof typeof colors],
                                 }}
                                 value={innerItem}
-                              >
-                                <span className="tooltip">{innerItem}</span>
-                              </li>
+                                title={innerItem}
+                              ></li>
                             ))
                           : (returnee = (
                               <li
@@ -426,8 +446,6 @@ const Product = ({ pageContext, data }: prop) => {
     </Layout>
   );
 };
-// <img src={featuredImage.src} alt={`image of ${title}`} />
-
 export const productsQuery = graphql`
   {
     allShopifyProduct {

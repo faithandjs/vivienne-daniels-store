@@ -44,26 +44,6 @@ const Products = ({ data }: productsProp) => {
       });
     }
   };
-  // useEffect(() => {
-  //   const showMenu = gsap
-  //     .from('header.products', {
-  //       yPercent: -100,
-  //       paused: true,
-  //       duration: 0.2,
-  //     })
-  //     .progress(1);
-
-  //   ScrollTrigger.create({
-  //     trigger: 'header.products',
-  //     start: 'bottom top',
-  //     // markers: true,
-  //     endTrigger: 'footer',
-  //     end: 'bottom bottom',
-  //     onUpdate: (self) => {
-  //       self.direction === -1 ? showMenu.play() : showMenu.reverse();
-  //     },
-  //   });
-  // });
   const returnTags = (tag: string, alt?: string) => {
     let temp: productProp[] = [];
     data.allShopifyProduct.edges.map((item) => {

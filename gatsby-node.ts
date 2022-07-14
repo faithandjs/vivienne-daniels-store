@@ -29,6 +29,9 @@ exports.createPages = async ({ graphql, actions }) => {
             variants {
               shopifyId
               displayName
+              image {
+                src
+              }
               id
               storefrontId
               selectedOptions {
@@ -64,93 +67,3 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   });
 };
-/*
-exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions;
-
-  const result = await graphql(`
-  {
-    allShopifyProduct(filter: {tags: {eq: "shoes"}}) {
-      edges {
-        node {
-          variants {
-            id
-          }
-          title
-          tags
-          description
-          featuredImage {
-            src
-          }
-          handle
-          media {
-            preview {
-              image {
-                src
-              }
-            }
-          }
-          priceRangeV2 {
-            maxVariantPrice {
-              amount
-            }
-          }
-        }
-      }
-    }
-  }
-  `);
-  console.log(result); 
-   createPage({
-      path: `/products/shoes`,
-      component: path.resolve(`./src/pages/shop/product.tsx`),
-      context: {
-        product: result.data,
-      },
-    });
-};
-exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions;
-
-  const result = await graphql(`
-  {
-    allShopifyProduct(filter: {tags: {eq: "dior"}}) {
-      edges {
-        node {
-          variants {
-            id
-          }
-          title
-          tags
-          description
-          featuredImage {
-            src
-          }
-          handle
-          media {
-            preview {
-              image {
-                src
-              }
-            }
-          }
-          priceRangeV2 {
-            maxVariantPrice {
-              amount
-            }
-          }
-        }
-      }
-    }
-  }
-  `);
-  console.log(result); 
-   createPage({
-      path: `/products/christian-dior`,
-      component: path.resolve(`./src/pages/shop/designer.tsx`),
-      context: {
-        product: result.data,
-      },
-    });
-};
-*/

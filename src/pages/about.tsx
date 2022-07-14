@@ -6,7 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const About = () => {
   gsap.registerPlugin(ScrollTrigger);
-   useEffect(() => {
+  useEffect(() => {
     let founder = gsap.timeline();
     if (window.matchMedia('( max-width: 924px)').matches) {
       let founder = gsap.timeline({
@@ -17,22 +17,19 @@ const About = () => {
         {
           opacity: 0.5,
           scale: 0.7,
-          // width: '0%',
           duration: 4,
           ease: 'linear',
-          delay: 1,
         },
         {
           opacity: 1,
           scale: 1,
-          // width: '100%',
           duration: 1,
         },
       );
     } else {
       founder.fromTo(
         '.img-box img',
-        { x: '5%', opacity: 0.7, duration: 2, delay: 1 },
+        { x: '5%', opacity: 0.7, duration: 2 },
         {
           opacity: 1,
           x: 0,

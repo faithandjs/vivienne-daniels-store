@@ -10,21 +10,16 @@
     .markers {
       position: absolute;
       width: 100%;
-      // height: 100%;
       top: 60%;
-      // top: 0;
       display: flex;
       justify-content: space-between;
       div {
         opacity: 0.5;
         width: 2.6rem;
         height: 2.6rem;
-        // height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-        // border-radius: 50%;
-        // padding: 5px;
         img {
           width: 1.6rem;
           height: 1.6rem;
@@ -39,8 +34,6 @@
     .img-box {
       z-index: -2;
       width: 50%;
-      // max-height: 55vh;
-      // height: 50vw;
       display: none;
       transition: ease-in;
       img {
@@ -57,43 +50,55 @@
         order: 2;
       }
     }
-    ul.list {
-      position: absolute;
+    .abs {
       display: none;
-      top: 5%;
+      position: absolute;
+      top: 7%;
       left: 2%;
-      max-width: calc(21vw + 10px);
-      flex-wrap: wrap;
-      // opacity: 0.8;
-      li {
-        position: relative;
-        width: 7.5vw;
-        height: 7.5vw;
-        // padding: ;
-        margin: 1px;
+      .navigation {
+        padding: 4px 20px;
+        border: 1px solid #a8a8a8;
         border-radius: 3px;
-        border: 3px solid transparent;
-        &::after {
-          content: '';
-          position: absolute;
-          z-index: -1;
-          top: 0;
-          left: 0;
-          width: calc(100% + 2px);
-          height: calc(100% + 2px);
-          transform: translate(-1px, -1px);
-          backdrop-filter: blur(20px);
-        }
+        width: max-content;
+
         img {
-          background-color: white;
-          object-fit: cover;
-          // opacity: 0.9;
+          width: 30px;
+          position: relative;
+          top: 3px;
         }
-        &:hover {
-          cursor: pointer;
-          // border-color: rgba(59, 51, 51, 0.384);
+      }
+      ul.list {
+        max-width: calc(21vw + 10px);
+        flex-wrap: wrap;
+        display: flex;
+        li {
+          position: relative;
+          width: 7.5vw;
+          height: 7.5vw;
+          margin: 1px;
+          border-radius: 3px;
+          border: 3px solid transparent;
           &::after {
-            background: $rainbow;
+            content: '';
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            width: calc(100% + 2px);
+            height: calc(100% + 2px);
+            transform: translate(-1px, -1px);
+            backdrop-filter: blur(20px);
+          }
+          img {
+            background-color: white;
+            object-fit: cover;
+            object-position: bottom;
+          }
+          &:hover {
+            cursor: pointer;
+            &::after {
+              background: $rainbow;
+            }
           }
         }
       }
@@ -146,9 +151,7 @@
             &.selected {
               position: relative;
               border-color: rgba(153, 153, 153, 0.411);
-              // color: $text;
-              &::after {
-              }
+
               &.color {
                 border: 0 !important;
                 &::after {
@@ -159,7 +162,7 @@
                   background-image: $rainbow;
                   top: 50%;
                   left: 50%;
-                  transform: translate(-51%, -50%);
+                  transform: translate(-50%, -50%);
                   width: 100%;
                   height: 100%;
 
@@ -173,12 +176,10 @@
               height: 35px;
               margin: 8px 15px;
               margin-left: 0;
-              // border-color: rgba(145, 144, 144, 0.281);
               border-radius: 50%;
             }
             &:hover {
               cursor: pointer;
-              //  @include clipText;
             }
           }
         }
@@ -186,10 +187,7 @@
     }
     .counter {
       margin: 10px 0;
-      // background-color: #faebd7;
       width: max-content;
-
-      // font-family: 'Fira Sans', sans-serif;
       .inner {
         button,
         span {
@@ -201,22 +199,12 @@
         }
         button {
           font-style: normal;
-          // width: 10vw;
           &:hover {
-            // transform: translateY(-1px);
-            // border-radius: 3px;
-            // border: 1px solid;
             border-color: black;
           }
           &:active {
             transform: translateY(1px);
           }
-          &:first-child {
-          }
-          &:last-child {
-          }
-        }
-        span {
         }
       }
     }
@@ -225,7 +213,6 @@
       width: 100%;
       text-align: end;
       button {
-        //////aqui
         font-size: 1.2rem;
         position: relative;
         padding: 9px clamp(26px, 10vw, 69px);
@@ -263,16 +250,14 @@
     text-align: start;
   }
   .productItems {
-    // z-index: 2;
     position: relative;
     .product-card {
-      // width: calc(30% + 0px);
       width: calc(50% - 5vw);
       .img-box {
         height: 38vw;
         img {
           object-position: bottom;
-          object-fit: scale-down;
+          object-fit: cover;
         }
       }
     }
@@ -289,13 +274,17 @@
       height: max-content;
       position: sticky;
       top: 100px;
+      .markers {
+        div {
+          opacity: 0.3;
+        }
+      }
       .img-box {
         z-index: -2;
         position: relative;
         width: 70%;
         margin: auto;
         margin-top: 5vh;
-        // height: 50vw;
         display: none;
 
         left: 5%;
@@ -306,8 +295,8 @@
           display: none;
         }
       }
-      ul.list {
-        display: flex;
+      .abs {
+        display: block;
       }
     }
     .details {
@@ -323,7 +312,6 @@
         top: 0px;
         width: 100%;
         height: 100%;
-        // background: rgba(255, 255, 255, 0.514);
         z-index: -1;
         -webkit-filter: blur(5px);
         filter: blur(5px);
@@ -345,7 +333,6 @@
   .product {
     .images {
       .img-box {
-        // background: $background;
         &.one {
           display: flex;
           width: 100%;
@@ -358,27 +345,6 @@
           display: none;
         }
       }
-      ul.list {
-      }
     }
-    // .details {
-    //   padding-top: 10vh;
-    //   width: 40%;
-
-    //   position: sticky;
-    //   top: 120px;
-    //   &::after {
-    //     content: '';
-    //     position: absolute;
-    //     left: 0px;
-    //     top: 0px;
-    //     width: 100%;
-    //     height: 100%;
-    //     // background: rgba(255, 255, 255, 0.514);
-    //     z-index: -1;
-    //     -webkit-filter: blur(5px);
-    //     filter: blur(5px);
-    //   }
-    // }
   }
 }

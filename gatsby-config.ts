@@ -27,13 +27,13 @@ const config: GatsbyConfig = {
         shopifyConnections: ['collections'], // source product collections too
       },
     },
-    /*  {
+     {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
         path: `${__dirname}/src/images`,
       },
-    },*/
+    },
   ],
   jsxRuntime: `automatic`,
 };

@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from 'react';
 import { productCardProp } from 'type';
 import { Link } from 'gatsby';
-import useStoreContext from '@/context/context';
 import Heart from './Heart';
 import Amount from './Amount';
-// import useStore from '@/context/StoreContext';
 
 const ProductCard = ({ product, fill }: productCardProp) => {
-  const { editWishlist, wishlist } = useStoreContext();
   const { featuredImage, handle, priceRangeV2, title, variants } = product.node;
 
   return (
@@ -31,4 +27,3 @@ const ProductCard = ({ product, fill }: productCardProp) => {
 };
 
 export default ProductCard;
-// style="enable-background:new 0 0 122.88 107.41"

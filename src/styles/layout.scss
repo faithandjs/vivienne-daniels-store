@@ -12,7 +12,6 @@ $footer_height: 55px;
 header,
 footer {
   z-index: 12;
-  // background-color: $background;
   color: $white;
   display: flex;
   width: 100%;
@@ -32,6 +31,9 @@ footer {
       }
       img {
         display: none;
+      }
+      &:hover {
+        cursor: pointer;
       }
     }
   }
@@ -59,12 +61,6 @@ header {
     display: flex;
     justify-content: center;
     li {
-      // span {
-      //   display: block;
-      // }
-      // img {
-      //   display: none;
-      // }
       &#cart {
         position: relative;
         .number {
@@ -89,7 +85,6 @@ header {
         height: 1.5px;
       }
       &:hover {
-        cursor: pointer;
         &::before {
           background-image: $rainbow;
         }
@@ -97,10 +92,8 @@ header {
     }
   }
   &.home {
-    // position: sticky;
-    position: fixed;
+    position: absolute;
     top: 0;
-    // background-color: rgba(0, 0, 0, 0.11);
     background-color: rgba(0, 0, 0, 0);
     @include undelinePage('home');
   }
@@ -130,6 +123,10 @@ header {
 section.cart {
   min-height: calc(100vh - ($header_height + $footer_height));
 }
+
+.children.home {
+  z-index: 15;
+}
 footer {
   height: $footer_height;
   background-color: $background-footer;
@@ -137,6 +134,7 @@ footer {
   align-items: center;
   font-size: 0.9rem;
   padding: 0 clamp(80px, 15vw, 204px);
+
   .large {
     p {
       a {
@@ -147,20 +145,99 @@ footer {
       }
     }
   }
-  ul {
+  .large-logos-box {
+    overflow: hidden;
+    height: 174px;
+    padding: 10px 35px;
+  }
+  ul.large-logos {
+    height: 100%;
+    position: relative;
+    width: 50vw;
+    transform: translateY(-174px);
+    li {
+      width: -webkit-fill-available;
+      margin: auto !important;
+      align-items: center;
+      height: 100%;
+      &.versace {
+        padding: 5vw;
+      }
+      &.hermes {
+        padding: 3.5vw;
+      }
+      &.ysl {
+        padding: 4vw;
+        a {
+          top: 40%;
+          position: relative;
+        }
+      }
+      &.dior {
+        text-align: center;
+        a {
+          top: 30%;
+          position: relative;
+        }
+        svg {
+          width: 20vw;
+        }
+      }
+      &.lv {
+        a {
+          top: 40%;
+          position: relative;
+        }
+        svg {
+          width: 100%;
+          height: 30px;
+        }
+      }
+      &.chanel {
+        a {
+          top: 38%;
+          position: relative;
+        }
+        svg {
+          width: 100%;
+          height: 35px;
+        }
+        padding: 2.5vw;
+      }
+      &.balenciaga {
+        a {
+          top: 40%;
+          position: relative;
+        }
+        img {
+          width: 50%;
+          height: auto;
+        }
+      }
+      img {
+        width: auto;
+        margin: auto;
+        max-width: 100%;
+        display: block;
+      }
+    }
+  }
+  ul#contact {
     li {
       &:hover {
         @include clipText;
       }
     }
   }
-  &.about,
   &.home {
     padding: 0 5vw;
     height: max-content;
+    background-color: #fff;
+    color: #000;
     .large {
       p {
         text-align: center;
+        font-weight: bold;
       }
       .logo {
         font-size: 6rem;
@@ -168,24 +245,32 @@ footer {
     }
     ul {
       display: block;
+      font-weight: bold;
       li {
         margin: 2vw;
+        font-size: 1.2rem;
       }
     }
   }
 }
 @keyframes underline {
 }
+@media screen and (max-width: 768px) {
+  footer {
+    .large-logos-box {
+      display: none;
+    }
+  }
+}
 @media screen and (max-width: 500px) {
   header,
   footer {
-    // footer
-
     padding: 0 3vw;
     .logo {
       font-size: 10vw;
     }
-    ul {
+    ul#contact,
+    ul.links {
       li {
         width: 6.2vw;
         margin: 0 3vw;
@@ -209,17 +294,7 @@ footer {
         margin: 0 2.5vw;
       }
     }
-
-    &.about,
     &.home {
-      // padding: 0 5vw;
-      .large {
-        p {
-        }
-        .logo {
-          // font-size: 6rem;
-        }
-      }
       ul {
         display: flex;
         li {

@@ -15,8 +15,6 @@
         .hearts {
           display: flex;
           align-items: baseline;
-          p {
-          }
           .addToWL {
             width: 25px;
           }
@@ -28,7 +26,6 @@
 @media screen and (max-width: 1011px) {
   .WL-list.productItems {
     .product-card {
-      // width: calc(30% + 0px);
       width: calc(50% - 5vw);
       .img-box {
         height: 40vw;
@@ -39,25 +36,3 @@
     }
   }
 }
-// @media screen and (max-width: 728px) {
-//   .productItems {
-//     .product-card {
-//       .img-box {
-//         height: 40vw;
-//         img {
-//           // object-position: 0px -2px;
-//         }
-//       }
-//     }
-//   }
-// }
-// @media screen and (max-width: 728px) {
-//   .productItems {
-//     .product-card {
-//       width: calc(50% - 4vw);
-//       .img-box {
-//         //height: 250px;
-//       }
-//     }
-//   }
-// }

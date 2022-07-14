@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Play&display=swap');
 $weLove: rgba(255, 255, 255, 0.827);
-// $weLove: rgba(235, 178, 178, 0.827);
+
 section.banner {
   padding: 0;
-  height: 100vh;
+  height: calc(86.5vh + 100px);
   position: relative;
   .img-box {
     width: 100%;
     height: inherit;
+    filter: grayscale(80%);
     img {
-      object-position: 35% 40%;
       object-fit: cover;
     }
   }
@@ -47,6 +47,14 @@ section.banner {
   to {
     stroke-dasharray: none;
     stroke-dashoffset: 0;
-    // fill: $weLove;
+  }
+}
+@media screen and (max-width: 600px) {
+  section.banner{
+    .img-box{
+      img{
+        //change image because the bag is too big for the screen
+      }
+    }
   }
 }

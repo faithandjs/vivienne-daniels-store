@@ -26,6 +26,9 @@ export interface productDetails {
     shopifyId: string;
     selectedOptions: selectedOptionsProp[];
     id: string;
+    image: {
+      src: string;
+    };
     storefrontId: string;
   }[];
   variant?: {
