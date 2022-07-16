@@ -1,16 +1,3 @@
-/*
-  plugins: [
-    {
-      resolve: 'gatsby-source-shopify',
-      options: {
-        password: process.env.SHOPIFY_APP_PASSWORD,
-        storeUrl: process.env.GATSBY_MYSHOPIFY_URL,
-        salesChannel: process.env.SHOPIFY_APP_ID, // Optional but recommended
-      },
-    },
-    'gatsby-plugin-image',
-  ]
-*/
 import type { GatsbyConfig } from 'gatsby';
 require('dotenv').config();
 const config: GatsbyConfig = {
@@ -23,7 +10,7 @@ const config: GatsbyConfig = {
       resolve: 'gatsby-source-shopify',
       options: {
         storeUrl: process.env.GATSBY_SHOPIFY_STORE_URL,
-        password: process.env.SHOPIFY_APP_PASSWORD,
+        password: process.env.GATSBY_SHOPIFY_APP_PASSWORD,
         shopifyConnections: ['collections'], // source product collections too
       },
     },

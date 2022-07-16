@@ -343,7 +343,11 @@ const Product = ({ pageContext, data }: prop) => {
                                 )}`}
                                 key={index}
                                 onClick={() => {
-                                  let temp: productDetails['variants'] = [];
+                                  setSelected({
+                                    ...selected,
+                                    [`${item.title}`]: innerItem,
+                                  });
+                                  let temp: string[] = [];
                                   variants.map((item) => {
                                     item.selectedOptions.map((newInnerItem) => {
                                       if (
@@ -351,7 +355,7 @@ const Product = ({ pageContext, data }: prop) => {
                                         'color'
                                       ) {
                                         if (newInnerItem.value === innerItem) {
-                                          temp = [...temp, item];
+                                          temp = [...temp, item.image.src];
                                         }
                                       }
                                     });
@@ -360,17 +364,23 @@ const Product = ({ pageContext, data }: prop) => {
                                   const allImgs = document.querySelectorAll(
                                     '.images .img-box img',
                                   );
-                                  allImgs.forEach((item, index) => {
-                                    if (
-                                      item.getAttribute('src') ===
-                                      temp[0].image.src
-                                    ) {
+                                  media.forEach((item, index) => {
+                                    const source = item.preview.image.src;
+                                    if (temp.includes(source)) {
                                       navigate(index);
+                                    } else if (
+                                      temp[0].length === source.length
+                                    ) {
+                                      if (
+                                        temp[0].substring(
+                                          0,
+                                          temp[0].length - 2,
+                                        ) ===
+                                        source.substring(0, source.length - 2)
+                                      ) {
+                                        navigate(index);
+                                      }
                                     }
-                                  });
-                                  setSelected({
-                                    ...selected,
-                                    [`${item.title}`]: innerItem,
                                   });
                                 }}
                                 style={{

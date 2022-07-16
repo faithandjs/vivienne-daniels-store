@@ -3,8 +3,13 @@ import '../styles/about.scss';
 import gsap from 'gsap';
 import { useEffect } from 'react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { graphql } from 'gatsby';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
-const About = () => {
+const About = (query: any) => {
+  const image = getImage(query.data.file);
+  console.log(query, image)
+  console.log('query, image')
   gsap.registerPlugin(ScrollTrigger);
   useEffect(() => {
     let founder = gsap.timeline();
@@ -71,10 +76,9 @@ const About = () => {
             </div>
           </div>
           <div className="img-box">
-            <img
-              src="/static/images/christina-wocintechchat-com-eZ8g_7Sh0J0-unsplash.jpg"
-              alt=" founder, vivienne daniels"
-            />
+            {image !== undefined && (
+              <GatsbyImage image={image} alt="banner: designer bag" />
+            )}
             <p>founder, vivienne daniels</p>
           </div>
         </section>
@@ -118,3 +122,17 @@ const About = () => {
 };
 
 export default About;
+export const pageQuery = graphql`
+  query founder {
+    file(
+      relativePath: {
+        eq: "christina-wocintechchat-com-eZ8g_7Sh0J0-unsplash.jpg"
+      }
+    ) {
+      childImageSharp {
+        gatsbyImageData(layout: CONSTRAINED)
+      }
+    }
+  }
+`;
+

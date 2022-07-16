@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Play&display=swap');
 $weLove: rgba(255, 255, 255, 0.827);
 
+.gatsby-image-wrapper {
+  position: unset;
+}
 section.banner {
   padding: 0;
   height: calc(86.5vh + 100px);
@@ -8,9 +11,11 @@ section.banner {
   .img-box {
     width: 100%;
     height: inherit;
-    filter: grayscale(80%);
+    // filter: grayscale(80%);
+    overflow: hidden;
     img {
       object-fit: cover;
+      object-position: top;
     }
   }
   .text {
@@ -49,11 +54,15 @@ section.banner {
     stroke-dashoffset: 0;
   }
 }
-@media screen and (max-width: 600px) {
-  section.banner{
-    .img-box{
-      img{
-        //change image because the bag is too big for the screen
+@media screen and (max-width: 425px) {
+  section.banner {
+    .img-box {
+      
+      // background-image: url('/static/images/cover-image-unsplash-banner.jpg'); 
+      // background-image: url('/static/images/lv-bags1.webp'); 
+      img {
+        // src: url('/static/images/lv-bags1.webp');
+        // display: none;
       }
     }
   }

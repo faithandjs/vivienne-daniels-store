@@ -9,8 +9,8 @@ import { graphql } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 export default function Home(query: any) {
-  console.log(query.data.file);
   const image = getImage(query.data.file)
+  console.log(image);
   gsap.registerPlugin(ScrollTrigger);
   const { passed } = useStoreContext();
   useEffect(() => {
@@ -95,9 +95,9 @@ export default function Home(query: any) {
 }
 export const pageQuery = graphql`
   query Banner {
-    file(relativePath: { eq: "content-pixie-ZB4eQcNqVUs-unsplash.jpg" }) {
+    file(relativePath: { eq: "lv-bags1.webp" }) {
       childImageSharp {
-        gatsbyImageData(layout: CONSTRAINED)
+        gatsbyImageData(layout: CONSTRAINED) 
       }
     }
   }

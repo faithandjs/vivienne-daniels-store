@@ -148,7 +148,7 @@ footer {
   .large-logos-box {
     overflow: hidden;
     height: 174px;
-    padding: 10px 35px;
+    // padding: 10px 35px;
   }
   ul.large-logos {
     height: 100%;
@@ -161,7 +161,7 @@ footer {
       align-items: center;
       height: 100%;
       &.versace {
-        padding: 5vw;
+        padding: calc(10px + 5vw) calc(35px + 5vw); //10px 35px;//5vw;
       }
       &.hermes {
         padding: 3.5vw;
