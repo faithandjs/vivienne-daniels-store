@@ -1,7 +1,7 @@
 import React from 'react';
 import { Context } from './context';
 
-const CombinedProvider = ({ element }: any) => {
+const CombinedProvider = ({ element }) => {
   return <Context>{element}</Context>;
 };
 
