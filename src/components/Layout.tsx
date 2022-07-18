@@ -3,6 +3,14 @@ import { Link } from 'gatsby';
 import { useEffect } from 'react';
 import gsap from 'gsap';
 import useStoreContext from '@/context/context';
+import about from '../icons/about.png';
+import home from '../icons/home.png';
+import store from '../icons/store.png';
+import wishlist from '../icons/wishlist.png';
+import cart from '../icons/shopping-cart.png';
+import IG from '../icons/instagram.png';
+import Twitter from '../icons/twitter.png';
+import Mail from '../icons/mail.png';
 
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 interface prop {
@@ -73,32 +81,31 @@ const Layout = ({ children, page }: prop) => {
           <Link to="/">
             <li id="home">
               <span>home</span>
-              <img src="/src/icons/home.png" alt="home icon" />
+              <img src={home} alt="home icon" />
             </li>
           </Link>
           <Link to="/about">
             <li id="about">
               <span>about</span>
-              <img src="/src/icons/about.png" alt="about icon" />
+              <img src={about} alt="about icon" />
             </li>
           </Link>
           <Link to="/products">
             <li id="products">
               <span>products</span>
-
-              <img src="/src/icons/store.png" alt="products icon" />
+              <img src={store} alt="products icon" />
             </li>
           </Link>
           <Link to="/wishlist">
             <li id="wishlist">
               <span>wishlist</span>
-              <img src="/src/icons/wishlist.png" alt="wishlist icon" />
+              <img src={wishlist} alt="wishlist icon" />
             </li>
           </Link>
           <Link to="/cart">
             <li id="cart">
               <span>cart</span>
-              <img src="/src/icons/shopping-cart.png" alt="cart icon" />
+              <img src={cart} alt="cart icon" />
               <span className="number">
                 {currentCheckout ? currentCheckout.lineItems.length : `0`}
               </span>
@@ -272,15 +279,15 @@ const Layout = ({ children, page }: prop) => {
         <ul id="contact">
           <li>
             <span>instagram</span>
-            <img src="/src/icons/instagram.png" alt="instagram icon" />
+            <img src={IG} alt="instagram icon" />
           </li>
           <li>
             <span>twitter</span>
-            <img src="/src/icons/twitter.png" alt="twitter icon" />
+            <img src={Twitter} alt="twitter icon" />
           </li>
           <li>
             <span>email</span>
-            <img src="/src/icons/mail.png" alt="mail icon" />
+            <img src={Mail} alt="mail icon" />
           </li>
         </ul>
       </footer>

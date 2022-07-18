@@ -5,7 +5,7 @@ import gsap from 'gsap';
 import useStoreContext from '@/context/context';
 import { Link } from 'gatsby';
 import { useEffect, useRef, useState } from 'react';
-import X from '@/icons/close.png'
+import X from '../icons/close.png'
 
 
 interface prop {

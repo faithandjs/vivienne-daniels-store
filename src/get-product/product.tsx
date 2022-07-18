@@ -8,6 +8,8 @@ import Amount from '@/components/Amount';
 import { graphql } from 'gatsby';
 import ProductCard from '@/components/ProductCard';
 import { navigate } from 'gatsby';
+import next from '../icons/next.png';
+import left_arrow from '../icons/left-arrow.png';
 
 interface prop {
   pageContext: { product: productProp };
@@ -229,13 +231,13 @@ const Product = ({ pageContext, data }: prop) => {
               <div className="markers">
                 <div className="prev" onClick={() => navigate('prev')}>
                   <img
-                    src="/src/icons/left-arrow.png"
+                    src={left_arrow}
                     alt={`previous image of ${title}`}
                   />
                 </div>
                 <div className="next" onClick={() => navigate('next')}>
                   <img
-                    src="/src/icons/next.png"
+                    src={next}
                     alt={`next image of ${title}`}
                   />
                 </div>
