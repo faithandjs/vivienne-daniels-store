@@ -97,7 +97,7 @@ export const pageQuery = graphql`
   query Banner {
     file(relativePath: { eq: "lv-bags1.webp" }) {
       childImageSharp {
-        gatsbyImageData(layout: CONSTRAINED) 
+        gatsbyImageData(layout: CONSTRAINED, placeholder: DOMINANT_COLOR)
       }
     }
   }

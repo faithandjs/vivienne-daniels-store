@@ -68,7 +68,7 @@ const Cart = () => {
       </div>
     );
   };
-
+  console.log(currentCheckout);
   return (
     <Layout page="cart">
       <section className="cart">
@@ -76,17 +76,19 @@ const Cart = () => {
         <div className="cart-list">
           {currentCheckout ? (
             currentCheckout.lineItems.length > 0 ? (
-              currentCheckout.lineItems.map((item: prop, index: number) => {
-                return (
-                  <CartCard
-                    key={index}
-                    id={item.id}
-                    quantity={item.quantity}
-                    variant={item.variant}
-                    title={item.title}
-                  />
-                );
-              })
+              currentCheckout.lineItems
+                .reverse()
+                .map((item: prop, index: number) => {
+                  return (
+                    <CartCard
+                      key={index}
+                      id={item.id}
+                      quantity={item.quantity}
+                      variant={item.variant}
+                      title={item.title}
+                    />
+                  );
+                })
             ) : (
               <div className="empty">your cart is empty</div>
             )

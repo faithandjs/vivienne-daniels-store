@@ -177,7 +177,7 @@ const Layout = ({ children, page }: prop) => {
                   <h1>
                     <img
                       className="u-hidden@lg"
-                      src="/static/images/ysl-logo.svg"
+                      src="https://www.ysl.com/on/demandware.static/-/Library-Sites-Library-SLP/default/dw4961ba3f/images/logo.svg"
                       alt="SAINT LAURENT LOGO"
                     />
                   </h1>
