@@ -91,9 +91,12 @@ export const Context = ({ children }: contextProp) => {
 
   const addToCart = async ({ quantity, variant }: cartProp) => {
     if (!initialSet.current) initialSet.current = true;
+
     if (typeof checkoutID === 'undefined') {
       console.log('no checkout id');
       await gettingCheckoutID();
+
+      addToCart({ quantity, variant });
     }
     const lineItemsToAdd = [
       {

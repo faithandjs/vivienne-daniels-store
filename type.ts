@@ -52,8 +52,6 @@ export interface productCardProp {
   people?: string;
 }
 export interface cartProp {
-  product: productProp;
   quantity: number;
   variant: string;
-  shopifyId: string;
 }
