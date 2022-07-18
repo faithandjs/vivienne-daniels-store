@@ -93,7 +93,7 @@ export const Context = ({ children }: contextProp) => {
     if (!initialSet.current) initialSet.current = true;
     if (typeof checkoutID === 'undefined') {
       console.log('no checkout id');
-      return;
+      await gettingCheckoutID();
     }
     const lineItemsToAdd = [
       {
@@ -131,7 +131,10 @@ export const Context = ({ children }: contextProp) => {
 
   const deleteFromCart = async (lineItemIdsToRemove: string[]) => {
     if (!initialSet.current) initialSet.current = true;
-
+    if (typeof checkoutID === 'undefined') {
+      console.log('no checkout id');
+      await gettingCheckoutID();
+    }
     if (currentCheckout.lineItems < 1) {
       console.log('cart empty');
       return;
