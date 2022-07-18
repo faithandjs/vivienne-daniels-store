@@ -32,7 +32,7 @@
   "dependencies": {
     "@types/shopify-buy": "2.10.10",
     "dotenv": "16.0.1",
-    "gatsby": "4.14.1",
+    "gatsby": "4.18.2",
     "gatsby-plugin-image": "2.15.0",
     "gatsby-plugin-load-script": "1.1.0",
     "gatsby-plugin-sass": "5.16.0",
@@ -51,6 +51,7 @@
   "devDependencies": {
     "@babel/preset-react": "7.17.12",
     "@babel/preset-typescript": "7.17.12",
+    "@babel/types": "7.18.9",
     "@commitlint/cli": "17.0.0",
     "@commitlint/config-conventional": "17.0.0",
     "@testing-library/dom": "8.13.0",
