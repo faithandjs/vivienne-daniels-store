@@ -190,7 +190,7 @@ const Products = ({ data }: productsProp) => {
               </div>{' '}
               <div className="x" onClick={() => settingDisplay(false)}>
                 <div>
-                  <img src="/static/icons/close.png" alt="close icon" />{' '}
+                  <img src="/src/icons/close.png" alt="close icon" />{' '}
                 </div>
               </div>
             </div>
@@ -201,7 +201,7 @@ const Products = ({ data }: productsProp) => {
               settingDisplay(true);
             }}
           >
-            <img src="/static/icons/search.png" alt="" />
+            <img src="/src/icons/search.png" alt="" />
           </div>
           <section className="main">
             {showing.replace(' ', '') ? (

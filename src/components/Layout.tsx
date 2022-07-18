@@ -73,32 +73,32 @@ const Layout = ({ children, page }: prop) => {
           <Link to="/">
             <li id="home">
               <span>home</span>
-              <img src="/static/icons/home.png" alt="home icon" />
+              <img src="/src/icons/home.png" alt="home icon" />
             </li>
           </Link>
           <Link to="/about">
             <li id="about">
               <span>about</span>
-              <img src="/static/icons/about.png" alt="about icon" />
+              <img src="/src/icons/about.png" alt="about icon" />
             </li>
           </Link>
           <Link to="/products">
             <li id="products">
               <span>products</span>
 
-              <img src="/static/icons/store.png" alt="products icon" />
+              <img src="/src/icons/store.png" alt="products icon" />
             </li>
           </Link>
           <Link to="/wishlist">
             <li id="wishlist">
               <span>wishlist</span>
-              <img src="/static/icons/wishlist.png" alt="wishlist icon" />
+              <img src="/src/icons/wishlist.png" alt="wishlist icon" />
             </li>
           </Link>
           <Link to="/cart">
             <li id="cart">
               <span>cart</span>
-              <img src="/static/icons/shopping-cart.png" alt="cart icon" />
+              <img src="/src/icons/shopping-cart.png" alt="cart icon" />
               <span className="number">
                 {currentCheckout ? currentCheckout.lineItems.length : `0`}
               </span>
@@ -272,15 +272,15 @@ const Layout = ({ children, page }: prop) => {
         <ul id="contact">
           <li>
             <span>instagram</span>
-            <img src="/static/icons/instagram.png" alt="instagram icon" />
+            <img src="/src/icons/instagram.png" alt="instagram icon" />
           </li>
           <li>
             <span>twitter</span>
-            <img src="/static/icons/twitter.png" alt="twitter icon" />
+            <img src="/src/icons/twitter.png" alt="twitter icon" />
           </li>
           <li>
             <span>email</span>
-            <img src="/static/icons/mail.png" alt="mail icon" />
+            <img src="/src/icons/mail.png" alt="mail icon" />
           </li>
         </ul>
       </footer>

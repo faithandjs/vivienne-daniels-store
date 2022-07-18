@@ -108,7 +108,7 @@ export const Context = ({ children }: contextProp) => {
           settingCheckout(checkout);
         });
     } catch (e) {
-      console.log('add while adding to cart', e);
+      console.log(' while adding to cart', e);
     }
   };
   const editWishlist = (product: productProp) => {

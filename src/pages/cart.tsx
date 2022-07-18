@@ -5,6 +5,9 @@ import gsap from 'gsap';
 import useStoreContext from '@/context/context';
 import { Link } from 'gatsby';
 import { useEffect, useRef, useState } from 'react';
+import X from '@/icons/close.png'
+
+
 interface prop {
   title: string;
   id: string;
@@ -24,7 +27,7 @@ interface prop {
 const Cart = () => {
   const { deleteFromCart, currentCheckout } = useStoreContext();
   const [currentI, setCurrentI] = useState<string[]>();
-
+console.log(X)
   const CartCard = ({ id, quantity, variant, title }: prop) => {
     return (
       <div className="box">
@@ -53,7 +56,7 @@ const Cart = () => {
                 });
               }}
             >
-              <img src="/static/icons/close.png" alt="close icon" />
+              <img src={X} alt="close icon" />
             </button>
           </div>
           <ul>

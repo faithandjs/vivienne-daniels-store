@@ -229,13 +229,13 @@ const Product = ({ pageContext, data }: prop) => {
               <div className="markers">
                 <div className="prev" onClick={() => navigate('prev')}>
                   <img
-                    src="/static/icons/left-arrow.png"
+                    src="/src/icons/left-arrow.png"
                     alt={`previous image of ${title}`}
                   />
                 </div>
                 <div className="next" onClick={() => navigate('next')}>
                   <img
-                    src="/static/icons/next.png"
+                    src="/src/icons/next.png"
                     alt={`next image of ${title}`}
                   />
                 </div>
@@ -273,7 +273,7 @@ const Product = ({ pageContext, data }: prop) => {
             })}
             <div className="abs">
               {/* <button className="navigation" onClick={() => navigate(-1)}>
-                <img src="/static/icons/back-arrow.png" alt="" />
+                <img src="/src/icons/back-arrow.png" alt="" />
               </button> */}
               <ul className="list">
                 {media.length > 1 &&
