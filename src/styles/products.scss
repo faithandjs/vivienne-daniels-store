@@ -139,9 +139,6 @@ $l-r-padding: 2.5vw;
       position: relative;
       .product-card {
         width: calc(30% + 0px);
-        h3 {
-          text-transform: capitalize;
-        }
         .img-box {
           height: 23vw;
           img {
@@ -179,7 +176,6 @@ $l-r-padding: 2.5vw;
     }
     .filter {
       z-index: 2;
-      // left: -2.2vw;
       transform: rotate(0.25turn) translate(0) scale(0.5);
       &:hover {
         cursor: pointer;
