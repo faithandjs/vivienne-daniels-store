@@ -70,4 +70,23 @@ section.banner {
   }
 }
 @supports (-webkit-touch-callout: none) {
+  section.banner {
+    padding: 0;
+    height: calc(86.5vh + 100px);
+    position: relative;
+   
+    .text {
+      svg{
+        text{
+          background-color: black;
+          position:absolute;
+          top:  50%;
+          left: 50;
+          transform: translate(-50%, -50%);
+          -o-transform: translate(-50%, -50%);
+
+        }
+      }
+    }}
+
 }
