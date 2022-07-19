@@ -72,7 +72,7 @@ export default function Home(query: any) {
     passed.current = true;
   });
   useEffect(() => {
-    if(passed.current){
+    if (passed.current) {
       // alert(
       //   `  height of text element: ${
       //     document.querySelector('.banner text')?.clientHeight
@@ -111,6 +111,7 @@ export default function Home(query: any) {
             <svg>
               <text x="0" y="100"></text>
             </svg>
+            <div className="test">testttttttttt</div>
           </div>
         </section>
       </>

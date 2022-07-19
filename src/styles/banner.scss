@@ -29,6 +29,7 @@ section.banner {
     width: 100%;
     background-color: rgba(0, 0, 0, 0.212);
     svg {
+      display: none;
       text-transform: uppercase;
       height: 100%;
       width: 100%;
@@ -43,6 +44,12 @@ section.banner {
         transform: translate(10%, 50%);
         position: absolute;
       }
+    }
+    .test {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 }
@@ -71,16 +78,11 @@ section.banner {
 }
 @supports (-webkit-touch-callout: none) {
   section.banner {
-    padding: 0;
-    height: calc(86.5vh + 100px);
-    position: relative;
-
     .text {
-      background-color: black !important;
       svg {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        // display: flex;
+        // align-items: center;
+        // justify-content: center;
         text {
           // position: absolute;
           // top: 50%;
