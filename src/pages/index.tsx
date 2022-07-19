@@ -73,28 +73,28 @@ export default function Home(query: any) {
   });
   useEffect(() => {
     if(passed.current){
-      alert(
-        `  height of text element: ${
-          document.querySelector('.banner text')?.clientHeight
-        },
-      width of text element: ${
-        document.querySelector('.banner text')?.clientWidth
-      },
-      height of svg element: ${
-        document.querySelector('.banner svg')?.clientHeight
-      },
-      width of svg element: ${
-        document.querySelector('.banner svg')?.clientWidth
-      },
-      height of svg-wrapper element: ${
-        document.querySelector('.banner .text')?.clientHeight
-      },
-      width of svg-wrapper element: ${
-        document.querySelector('.banner .text')?.clientWidth
-      },
-      `,
-      ),
-        5000;
+      // alert(
+      //   `  height of text element: ${
+      //     document.querySelector('.banner text')?.clientHeight
+      //   },
+      // width of text element: ${
+      //   document.querySelector('.banner text')?.clientWidth
+      // },
+      // height of svg element: ${
+      //   document.querySelector('.banner svg')?.clientHeight
+      // },
+      // width of svg element: ${
+      //   document.querySelector('.banner svg')?.clientWidth
+      // },
+      // height of svg-wrapper element: ${
+      //   document.querySelector('.banner .text')?.clientHeight
+      // },
+      // width of svg-wrapper element: ${
+      //   document.querySelector('.banner .text')?.clientWidth
+      // },
+      // `,
+      // ),
+      //   5000;
     }
   }, []);
   return (
