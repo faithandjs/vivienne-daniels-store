@@ -108,6 +108,32 @@ a {
     cursor: pointer;
   }
 }
+@supports (-webkit-touch-callout: none) {
+  .addToWL {
+    width: 30px;
+
+    padding: 3px;
+    transform: translateY(5px);
+    .tooltip {
+      left: unset;
+      right: 0;
+      transform: translate(0);
+      bottom: calc(100%);
+      padding: 3px;
+      border: 0;
+    }
+    svg {
+      width: max-content;
+      path {
+        transform: translate(-10px, -10px);
+        position: relative;
+      }
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
 .box-sm {
   background: rgba(0, 0, 0, 0.116);
   border-radius: 3px;
@@ -165,7 +191,7 @@ $l-r-padding: 2.5vw;
       h3,
       h4 {
         padding: 2vh 0 0;
-        text-transform: capitalize; 
+        text-transform: capitalize;
       }
 
       .extra {
