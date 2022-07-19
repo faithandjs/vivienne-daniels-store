@@ -13,7 +13,10 @@
           display: flex;
           align-items: baseline;
           .addToWL {
-            width: 25px;
+            width: unset;
+            svg {
+              width: 25px;
+            }
           }
         }
       }
