@@ -123,7 +123,9 @@ header {
 section.cart {
   min-height: calc(100vh - ($header_height + $footer_height));
 }
-
+.children {
+  background-color: #fff;
+}
 .children.home {
   z-index: 15;
 }

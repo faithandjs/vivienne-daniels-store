@@ -8,8 +8,8 @@ import { useEffect, useRef, useState } from 'react';
 import { type } from 'os';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import search from '../icons/search.png'
-import X from '../icons/close.png'
+import search from '../icons/search.png';
+import X from '../icons/close.png';
 
 const Products = ({ data }: productsProp) => {
   gsap.registerPlugin(ScrollTrigger);
@@ -190,8 +190,8 @@ const Products = ({ data }: productsProp) => {
                 </section>
                 <p></p>
               </div>{' '}
-              <div className="x" onClick={() => settingDisplay(false)}>
-                <div>
+              <div className="x">
+                <div onClick={() => settingDisplay(false)}>
                   <img src={X} alt="close icon" />
                 </div>
               </div>
