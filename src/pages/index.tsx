@@ -9,7 +9,7 @@ import { graphql } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 export default function Home(query: any) {
-  const image = getImage(query.data.file)
+  const image = getImage(query.data.file);
   gsap.registerPlugin(ScrollTrigger);
   const { passed } = useStoreContext();
   useEffect(() => {
@@ -71,15 +71,59 @@ export default function Home(query: any) {
     }
     passed.current = true;
   });
-
+  useEffect(() => {
+    if(passed.current){
+      console.log( `  height of text element: ${
+        document.querySelector('.banner text')?.clientHeight
+      },
+    width of text element: ${
+      document.querySelector('.banner text')?.clientWidth
+    },
+    height of svg element: ${
+      document.querySelector('.banner svg')?.clientHeight
+    },
+    width of svg element: ${
+      document.querySelector('.banner svg')?.clientWidth
+    },
+    height of svg-wrapper element: ${
+      document.querySelector('.banner .text')?.clientHeight
+    },
+    width of svg-wrapper element: ${
+      document.querySelector('.banner .text')?.clientWidth
+    },
+    `, )
+      alert(
+        `  height of text element: ${
+          document.querySelector('.banner text')?.clientHeight
+        },
+      width of text element: ${
+        document.querySelector('.banner text')?.clientWidth
+      },
+      height of svg element: ${
+        document.querySelector('.banner svg')?.clientHeight
+      },
+      width of svg element: ${
+        document.querySelector('.banner svg')?.clientWidth
+      },
+      height of svg-wrapper element: ${
+        document.querySelector('.banner .text')?.clientHeight
+      },
+      width of svg-wrapper element: ${
+        document.querySelector('.banner .text')?.clientWidth
+      },
+      `,
+      ),
+        5000;
+    }
+  }, []);
   return (
     <Layout page="home">
       <>
         <section className="banner">
           <div className="img-box">
-           { image !== undefined &&
-            <GatsbyImage image={image} alt="banner: designer bag" />
-            }
+            {image !== undefined && (
+              <GatsbyImage image={image} alt="banner: designer bag" />
+            )}
             {/* <img src="/images/content-pixie-ZB4eQcNqVUs-unsplash.jpg" /> */}
           </div>
           <div className="text">
