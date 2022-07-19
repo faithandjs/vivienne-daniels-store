@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Play&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text&display=swap');
+
 $weLove: rgba(255, 255, 255, 0.827);
 
 .gatsby-image-wrapper {
@@ -11,7 +12,6 @@ section.banner {
   .img-box {
     width: 100%;
     height: inherit;
-    // filter: grayscale(80%);
     overflow: hidden;
     img {
       object-fit: cover;
@@ -19,7 +19,6 @@ section.banner {
     }
   }
   .text {
-    font-family: 'Cormorant Garamond', serif;
     position: absolute;
     top: 0;
     left: 0;
@@ -29,7 +28,6 @@ section.banner {
     width: 100%;
     background-color: rgba(0, 0, 0, 0.212);
     svg {
-      display: none;
       text-transform: uppercase;
       height: 100%;
       width: 100%;
@@ -45,11 +43,8 @@ section.banner {
         position: absolute;
       }
     }
-    .test {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+    .WLD {
+      display: none;
     }
   }
 }
@@ -64,31 +59,37 @@ section.banner {
     stroke-dashoffset: 0;
   }
 }
-@media screen and (max-width: 425px) {
-  section.banner {
-    .img-box {
-      // background-image: url('/static/images/cover-image-unsplash-banner.jpg');
-      // background-image: url('/static/images/lv-bags1.webp');
-      img {
-        // src: url('/static/images/lv-bags1.webp');
-        // display: none;
-      }
-    }
-  }
-}
 @supports (-webkit-touch-callout: none) {
   section.banner {
     .text {
       svg {
-        // display: flex;
-        // align-items: center;
-        // justify-content: center;
-        text {
-          // position: absolute;
-          // top: 50%;
-          // left: 50;
-          // transform: translate(-50%, -50%);
-          // -o-transform: translate(-50%, -50%);
+        display: none;
+      }
+      .WLD {
+        display: block;
+
+        position: absolute;
+        white-space: nowrap;
+        color: #fff;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 8vw;
+        text-transform: uppercase;
+        .upper-box {
+          position: relative;
+          top: 6.5vw;
+        }
+        .upper-box,
+        .lower-box {
+          overflow: hidden;
+          width: 100%;
+          height: max-content;
+          div {
+            text-align: center;
+            font-family: 'DM Serif Text', serif;
+            // line-height: 4.5vw;
+          }
         }
       }
     }

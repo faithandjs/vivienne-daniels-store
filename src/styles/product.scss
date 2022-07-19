@@ -13,6 +13,7 @@
       top: 60%;
       display: flex;
       justify-content: space-between;
+      z-index: 2;
       div {
         opacity: 0.5;
         width: 2.6rem;
@@ -32,7 +33,7 @@
       }
     }
     .img-box {
-      z-index: -2;
+      z-index: 1;
       width: 50%;
       display: none;
       transition: ease-in;
@@ -121,10 +122,6 @@
 
       .addToWL {
         width: 30px;
-        svg {
-          path {
-          }
-        }
       }
       .amount {
         font-size: 1.5rem;
@@ -280,7 +277,7 @@
         }
       }
       .img-box {
-        z-index: -2;
+        z-index: 1;
         position: relative;
         width: 70%;
         margin: auto;

@@ -17,6 +17,12 @@ export default function Home(query: any) {
       ? (document.querySelector('.banner text')!.textContent =
           'we love designers!')
       : null;
+    document.querySelector('.banner .WLD')
+      ? (document.querySelector('.WLD .upper')!.textContent = 'we love ')
+      : null;
+    document.querySelector('.banner .WLD')
+      ? (document.querySelector('.WLD .lower')!.textContent = 'designers!')
+      : null;
     if (!passed.current) {
       const banner = gsap.timeline();
       banner
@@ -45,6 +51,9 @@ export default function Home(query: any) {
             fill: 'rgba(255, 255, 255, 0.267)',
           },
         )
+        .from('.WLD .upper ', { duration: 0.75, yPercent: 100 }, '<1')
+        .from('.WLD .lower', { duration: 0.75, yPercent: -100 }, '<0')
+        .to(' .WLD .upper, .WLD .lower', { duration: 1, ease: 'none' })
         .fromTo(
           'header.home .logo ',
           { opacity: 0, scale: 0.7 },
@@ -70,33 +79,18 @@ export default function Home(query: any) {
         );
     }
     passed.current = true;
+
+    // var tl = gsap.timeline();
+
+    // tl.from('.banner .upper, ', { duration: 0.75, yPercent: 100 }, 'text');
+    // tl.from('.banner .lower', { duration: 0.75, yPercent: -100 }, 'text');
+    // tl.to(
+    //   ' .banner .upper, .banner .lower',
+    //   { duration: 1, ease: 'none' },
+    //   '+=2',
+    // );
   });
-  useEffect(() => {
-    if (passed.current) {
-      // alert(
-      //   `  height of text element: ${
-      //     document.querySelector('.banner text')?.clientHeight
-      //   },
-      // width of text element: ${
-      //   document.querySelector('.banner text')?.clientWidth
-      // },
-      // height of svg element: ${
-      //   document.querySelector('.banner svg')?.clientHeight
-      // },
-      // width of svg element: ${
-      //   document.querySelector('.banner svg')?.clientWidth
-      // },
-      // height of svg-wrapper element: ${
-      //   document.querySelector('.banner .text')?.clientHeight
-      // },
-      // width of svg-wrapper element: ${
-      //   document.querySelector('.banner .text')?.clientWidth
-      // },
-      // `,
-      // ),
-      //   5000;
-    }
-  }, []);
+
   return (
     <Layout page="home">
       <>
@@ -105,13 +99,19 @@ export default function Home(query: any) {
             {image !== undefined && (
               <GatsbyImage image={image} alt="banner: designer bag" />
             )}
-            {/* <img src="/images/content-pixie-ZB4eQcNqVUs-unsplash.jpg" /> */}
           </div>
           <div className="text">
             <svg>
               <text x="0" y="100"></text>
             </svg>
-            <div className="test">testttttttttt</div>
+            <div className="WLD">
+              <div className="upper-box">
+                <div className="upper">we love</div>
+              </div>
+              <div className="lower-box">
+                <div className="lower">designers!</div>
+              </div>
+            </div>
           </div>
         </section>
       </>
