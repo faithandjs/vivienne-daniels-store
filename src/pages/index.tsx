@@ -23,61 +23,63 @@ export default function Home(query: any) {
     document.querySelector('.banner .WLD')
       ? (document.querySelector('.WLD .lower')!.textContent = 'designers!')
       : null;
-    if (!passed.current) {
-      const banner = gsap.timeline();
-      banner
-        .fromTo(
-          '.banner .text',
-          { display: 'none', backgroundColor: 'rgba(0, 0, 0, 1)' },
-          {
-            display: 'block',
-            backgroundColor: 'rgba(0, 0, 0, 0.212)',
-            duration: 0.5,
-          },
-        )
-        .fromTo('.banner img', { opacity: 0 }, { opacity: 1, duration: 1 }, '<')
-        .fromTo(
-          '.banner text',
-          {
-            strokeDasharray: 900,
-            strokeDashoffset: 900,
-            fill: 'transparent',
-            opacity: 0.7,
-          },
-          {
-            strokeDashoffset: 0,
-            duration: 2.5,
-            opacity: 1,
-            fill: 'rgba(255, 255, 255, 0.267)',
-          },
-        )
-        .from('.WLD .upper ', { duration: 0.75, yPercent: 100 }, '<1')
-        .from('.WLD .lower', { duration: 0.75, yPercent: -100 }, '<0')
-        .to(' .WLD .upper, .WLD .lower', { duration: 1, ease: 'none' })
-        .fromTo(
-          'header.home .logo ',
-          { opacity: 0, scale: 0.7 },
-          { opacity: 1, duration: 1, scale: 1 },
-          '-=2',
-        )
-        .fromTo(
-          'header.home .links li ',
-          {
-            opacity: 0,
-            y: -100,
-          },
-          {
-            opacity: 1,
-            y: 0,
-            stagger: {
-              from: 'end',
-              ease: 'power3.inOut',
-              amount: 1,
-            },
-          },
-          '>-1',
-        );
-    }
+    // if (!passed.current) {
+    const banner = gsap.timeline({ delay: 0.7 });
+    const banner1 = gsap.timeline();
+    // banner
+    // .fromTo(
+    //   '.banner .text',
+    //   { display: 'none', backgroundColor: 'rgba(0, 0, 0, 1)' },
+    //   {
+    //     display: 'block',
+    //     backgroundColor: 'rgba(0, 0, 0, 0.212)',
+    //     duration: 0.5,
+    //   },
+    // )
+    // .fromTo('.banner img', { opacity: 0 }, { opacity: 1, duration: 1 }, '<')
+    banner.fromTo(
+      '.banner text',
+      {
+        strokeDasharray: 900,
+        strokeDashoffset: 900,
+        fill: 'transparent',
+        opacity: 0.7,
+      },
+      {
+        strokeDashoffset: 0,
+        duration: 2.5,
+        opacity: 1,
+        fill: 'rgba(255, 255, 255, 0.267)',
+      },
+    );
+    banner1
+      .from('.WLD .upper ', { duration: 0.75, yPercent: 100 }, '<1')
+      .from('.WLD .lower', { duration: 0.75, yPercent: -100 }, '<0')
+      .to(' .WLD .upper, .WLD .lower', { duration: 1, ease: 'none' });
+    // .fromTo(
+    //   'header.home .logo ',
+    //   { opacity: 0, scale: 0.7 },
+    //   { opacity: 1, duration: 1, scale: 1 },
+    //   '-=2',
+    // )
+    // .fromTo(
+    //   'header.home .links li ',
+    //   {
+    //     opacity: 0,
+    //     y: -100,
+    //   },
+    //   {
+    //     opacity: 1,
+    //     y: 0,
+    //     stagger: {
+    //       from: 'end',
+    //       ease: 'power3.inOut',
+    //       amount: 1,
+    //     },
+    //   },
+    //   '>-1',
+    // );
+    // }
     passed.current = true;
 
     // var tl = gsap.timeline();

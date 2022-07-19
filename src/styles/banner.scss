@@ -26,8 +26,9 @@ section.banner {
     bottom: 0;
     height: calc(86.5vh + 100px);
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.212);
+    background-color: rgba(0, 0, 0, 0.192);
     svg {
+      // display: none;
       text-transform: uppercase;
       height: 100%;
       width: 100%;
@@ -39,12 +40,44 @@ section.banner {
         stroke-width: 1px;
         stroke-dashoffset: 900;
         fill: rgba(255, 255, 255, 0.267);
-        transform: translate(10%, 50%);
-        position: absolute;
+        transform: translate(10%, 40%);
       }
     }
     .WLD {
       display: none;
+      position: absolute;
+      white-space: nowrap;
+      color: rgb(238, 240, 161);
+      // color: rgb(210, 212, 50);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 8vw;
+      text-transform: uppercase;
+      .upper-box {
+        position: relative;
+        top: 6vw;
+        left: -5vw;
+      }
+      .lower-box {
+        position: relative;
+        right: -5vw;
+      }
+      .upper-box,
+      .lower-box {
+        overflow: hidden;
+        width: 100%;
+        height: max-content;
+        stroke: $weLove;
+
+        stroke-width: 1px;
+        stroke-dashoffset: 900;
+        div {
+          // text-align: center;
+          font-family: 'DM Serif Text', serif;
+          // line-height: 4.5vw;
+        }
+      }
     }
   }
 }
@@ -67,29 +100,17 @@ section.banner {
       }
       .WLD {
         display: block;
-
-        position: absolute;
-        white-space: nowrap;
-        color: #fff;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 8vw;
-        text-transform: uppercase;
+      }
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  section.banner {
+    .text {
+      .WLD {
+        font-size: 13vw;
         .upper-box {
-          position: relative;
-          top: 6.5vw;
-        }
-        .upper-box,
-        .lower-box {
-          overflow: hidden;
-          width: 100%;
-          height: max-content;
-          div {
-            text-align: center;
-            font-family: 'DM Serif Text', serif;
-            // line-height: 4.5vw;
-          }
+          top: 10vw;
         }
       }
     }

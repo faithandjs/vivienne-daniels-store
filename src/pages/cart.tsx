@@ -5,8 +5,7 @@ import gsap from 'gsap';
 import useStoreContext from '@/context/context';
 import { Link } from 'gatsby';
 import { useEffect, useRef, useState } from 'react';
-import X from '../icons/close.png'
-
+import X from '../icons/close.png';
 
 interface prop {
   title: string;
@@ -26,7 +25,7 @@ interface prop {
 
 const Cart = () => {
   const { deleteFromCart, currentCheckout } = useStoreContext();
-  const [currentI, setCurrentI] = useState<string[]>();
+  const [currentI, setCurrentI] = useState<{ id: string; title: string }>();
   const CartCard = ({ id, quantity, variant, title }: prop) => {
     return (
       <div className="box">
@@ -47,7 +46,7 @@ const Cart = () => {
             <button
               type="button"
               onClick={(e) => {
-                setCurrentI([id]);
+                setCurrentI({ id: id, title: title });
                 gsap.to('.modal', {
                   x: '0%',
                   opacity: 1,
@@ -110,6 +109,7 @@ const Cart = () => {
         <div className="modal">
           <div className="innerM">
             <p>Delete selected?</p>
+            <p> {`> ${currentI?.title}`}</p>
             <div className="btns">
               <button
                 onClick={() => {
@@ -129,7 +129,7 @@ const Cart = () => {
               </button>
               <button
                 onClick={() => {
-                  deleteFromCart(currentI);
+                  deleteFromCart([currentI?.id]);
                   gsap
                     .timeline()
                     .to('.modal', {

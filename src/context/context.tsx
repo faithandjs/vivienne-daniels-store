@@ -167,7 +167,7 @@ export const Context = ({ children }: contextProp) => {
       currentCheckout,
       passed,
       editWishlist,
-      wishlist.reverse(),
+      wishlist,
       setfilling,
     ],
   );
