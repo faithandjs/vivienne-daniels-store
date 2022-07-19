@@ -162,7 +162,7 @@ footer {
       align-items: center;
       height: 100%;
       &.versace {
-        padding: calc(10px + 5vw) calc(35px + 5vw); 
+        padding: calc(10px + 5vw) calc(35px + 5vw);
       }
       &.hermes {
         padding: 3.5vw;
@@ -257,6 +257,17 @@ footer {
 @keyframes underline {
 }
 @media screen and (max-width: 768px) {
+  header {
+    .links {
+      li {
+        &:hover {
+          &::before {
+            background-image: unset;
+          }
+        }
+      }
+    }
+  }
   footer {
     .large-logos-box {
       display: none;

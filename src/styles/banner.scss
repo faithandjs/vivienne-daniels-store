@@ -28,7 +28,7 @@ section.banner {
     width: 100%;
     background-color: rgba(0, 0, 0, 0.301);
     svg {
-      // display: none;
+      display: none;
       text-transform: uppercase;
       height: 100%;
       width: 100%;
@@ -44,7 +44,7 @@ section.banner {
       }
     }
     .WLD {
-      display: none;
+      // display: none;
       position: absolute;
       white-space: nowrap;
       color: rgb(202, 202, 202);
@@ -73,7 +73,7 @@ section.banner {
         stroke-width: 1px;
         stroke-dashoffset: 900;
         div {
-          opacity: 0;
+          // opacity: 0;
           font-family: 'DM Serif Text', serif;
         }
       }

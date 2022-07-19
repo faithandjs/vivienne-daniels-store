@@ -26,30 +26,39 @@ export default function Home(query: any) {
 
     const banner = gsap.timeline({ delay: 0.7 });
     const banner1 = gsap.timeline();
-    banner.fromTo(
-      '.banner text',
-      {
-        strokeDasharray: 900,
-        strokeDashoffset: 900,
-        fill: 'transparent',
-        opacity: 0.7,
-      },
-      {
-        strokeDashoffset: 0,
-        duration: 2.5,
-        opacity: 1,
-        fill: 'rgba(255, 255, 255, 0.267)',
-      },
-    );
-    banner1
-      .from('.WLD .upper ', { duration: 0.75, yPercent: 100, opacity:1 }, '<1')
-      .from('.WLD .lower', { duration: 0.75, yPercent: -100, opacity:1 }, '<0')
-      .to(' .WLD .upper, .WLD .lower', {
-        duration: 1,
-        ease: 'none',
-        yPercent: 0,
-      });
-
+    if (!passed.current) {
+      banner.fromTo(
+        '.banner text',
+        {
+          strokeDasharray: 900,
+          strokeDashoffset: 900,
+          fill: 'transparent',
+          opacity: 0.7,
+        },
+        {
+          strokeDashoffset: 0,
+          duration: 2.5,
+          opacity: 1,
+          fill: 'rgba(255, 255, 255, 0.267)',
+        },
+      );
+      banner1
+        .from(
+          '.WLD .upper ',
+          { duration: 0.75, yPercent: 100 },
+          '<1',
+        )
+        .from(
+          '.WLD .lower',
+          { duration: 0.75, yPercent: -100},
+          '<0',
+        )
+        .to(' .WLD .upper, .WLD .lower', {
+          duration: 1,
+          ease: 'none',
+          yPercent: 0,
+        });
+    }
     passed.current = true;
   });
 
