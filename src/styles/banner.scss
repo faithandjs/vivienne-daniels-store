@@ -2,7 +2,7 @@
 $weLove: rgba(255, 255, 255, 0.827);
 
 .gatsby-image-wrapper {
-  position: unset;
+  position: unset !important;
 }
 section.banner {
   padding: 0;
@@ -24,7 +24,8 @@ section.banner {
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;    height: 100%;
+    bottom: 0;
+    height: 100%;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.212);
     svg {
@@ -58,9 +59,8 @@ section.banner {
 @media screen and (max-width: 425px) {
   section.banner {
     .img-box {
-      
-      // background-image: url('/static/images/cover-image-unsplash-banner.jpg'); 
-      // background-image: url('/static/images/lv-bags1.webp'); 
+      // background-image: url('/static/images/cover-image-unsplash-banner.jpg');
+      // background-image: url('/static/images/lv-bags1.webp');
       img {
         // src: url('/static/images/lv-bags1.webp');
         // display: none;
@@ -69,7 +69,4 @@ section.banner {
   }
 }
 @supports (-webkit-touch-callout: none) {
-
-  
 }
-
