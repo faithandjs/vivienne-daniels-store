@@ -1,4 +1,4 @@
-import React from 'react';
+import '../styles/global.scss'
 import useStoreContext from '@/context/context';
 import { productCardProp } from 'type';
 
