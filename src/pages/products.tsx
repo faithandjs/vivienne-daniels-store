@@ -273,35 +273,3 @@ export const productsQuery = graphql`
 `;
 
 export default Products;
-/*
-    const variables = { tag: tag };
-    const productsQuery =  (graphql`
-      query tagProducts($tag: String) {
-        allShopifyProduct(filter: { tags: { eq: $tag } }) {
-          edges {
-            node {
-              featuredImage {
-                src
-              }
-              title
-              priceRangeV2 {
-                maxVariantPrice {
-                  amount
-                }
-              }
-              media {
-                preview {
-                  image {
-                    src
-                  }
-                }
-              }
-              variants {
-                id
-              }
-              tags
-            }
-          }
-        }
-      }
-    `, {tag: tag});*/

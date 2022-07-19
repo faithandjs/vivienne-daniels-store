@@ -81,11 +81,10 @@ a {
   }
 }
 .addToWL {
-  width: 30px;
   padding: 3px;
   transform: translateY(5px);
   svg {
-    width: max-content;
+    width: 30px;
     path {
       transform: translate(-10px, -10px);
       -o-transform: translate(-10px, -10px);
@@ -94,21 +93,6 @@ a {
   }
   &:hover {
     cursor: pointer;
-  }
-}
-@supports (-webkit-touch-callout: none) {
-  .addToWL {
-    .tooltip {
-    }
-    svg {
-      path {
-        // transform: translate(-10px, -10px);
-        // position: relative;
-      }
-    }
-    &:hover {
-      // cursor: pointer;
-    }
   }
 }
 .box-sm {
@@ -176,11 +160,16 @@ $l-r-padding: 2.5vw;
         justify-content: space-between;
         align-items: baseline;
       }
+      .addToWL {
+        svg {
+          width: 25px;
+        }
+      }
       p {
         padding: 2vh 0;
         span {
           text-transform: uppercase;
-          // font-weight: bold;
+           font-weight: bold;
           font-size: 1.2rem;
         }
       }

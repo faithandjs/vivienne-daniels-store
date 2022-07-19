@@ -263,11 +263,6 @@ const Layout = ({ children, page }: prop) => {
                     src="https://www.balenciaga.com/on/demandware.static/-/Sites/default/dw4a689780/images/logo/BAL/logo.svg"
                     alt="Balenciaga - Go to the Homepage"
                   />
-
-                  {/* <img
-                  src="https://www.balenciaga.com/on/demandware.static/-/Sites/default/dwdb8100f9/images/logo/BAL/logo-small.svg"
-                  alt="Balenciaga - Go to the Homepage"
-                /> */}
                 </a>
               </li>
             </ul>

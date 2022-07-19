@@ -271,9 +271,6 @@ const Product = ({ pageContext, data }: prop) => {
               );
             })}
             <div className="abs">
-              {/* <button className="navigation" onClick={() => navigate(-1)}>
-                <img src="/src/icons/back-arrow.png" alt="" />
-              </button> */}
               <ul className="list">
                 {media.length > 1 &&
                   media.map((item, index) => {
