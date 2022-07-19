@@ -27,7 +27,6 @@ interface prop {
 const Cart = () => {
   const { deleteFromCart, currentCheckout } = useStoreContext();
   const [currentI, setCurrentI] = useState<string[]>();
-console.log(X)
   const CartCard = ({ id, quantity, variant, title }: prop) => {
     return (
       <div className="box">
@@ -71,7 +70,6 @@ console.log(X)
       </div>
     );
   };
-  console.log(currentCheckout);
   return (
     <Layout page="cart">
       <section className="cart">

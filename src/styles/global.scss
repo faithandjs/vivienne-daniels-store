@@ -24,12 +24,7 @@ body {
   color: $text;
   min-width: 310px;
 }
-@media screen and (max-width: 425px) {
-  html,
-  body {
-    // font-size: 14px;
-  }
-}
+
 #___gatsby,
 #gatsby-focus-wrapper {
   min-height: -webkit-fill-available;
@@ -110,20 +105,9 @@ a {
 }
 @supports (-webkit-touch-callout: none) {
   .addToWL {
-    width: 30px;
-
-    padding: 3px;
-    transform: translateY(5px);
     .tooltip {
-      left: unset;
-      right: 0;
-      transform: translate(0);
-      bottom: calc(100%);
-      padding: 3px;
-      border: 0;
     }
     svg {
-      width: max-content;
       path {
         transform: translate(-10px, -10px);
         position: relative;

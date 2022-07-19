@@ -8,8 +8,6 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 const About = (query: any) => {
   const image = getImage(query.data.file);
-  console.log(query, image)
-  console.log('query, image')
   gsap.registerPlugin(ScrollTrigger);
   useEffect(() => {
     let founder = gsap.timeline();

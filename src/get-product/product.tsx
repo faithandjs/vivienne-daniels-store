@@ -70,7 +70,6 @@ const Product = ({ pageContext, data }: prop) => {
   };
   const addingVariant = () => {
     if (!selected) {
-      console.log('select all options');
       return;
     }
     if (Object.keys(selected).length === namesArray.length) {
@@ -86,8 +85,6 @@ const Product = ({ pageContext, data }: prop) => {
         const variant = filtered[0].variant;
         addToCart({ quantity, variant });
       }
-    } else {
-      console.log('select all options');
     }
   };
   const colors = {

@@ -93,7 +93,7 @@ export const Context = ({ children }: contextProp) => {
     if (!initialSet.current) initialSet.current = true;
 
     if (typeof checkoutID === 'undefined') {
-      console.log('no checkout id');
+      // console.log('no checkout id');
       await gettingCheckoutID();
 
       addToCart({ quantity, variant });
@@ -111,7 +111,7 @@ export const Context = ({ children }: contextProp) => {
           settingCheckout(checkout);
         });
     } catch (e) {
-      console.log(' while adding to cart', e);
+      console.log(e);
     }
   };
   const editWishlist = (product: productProp) => {
@@ -135,11 +135,11 @@ export const Context = ({ children }: contextProp) => {
   const deleteFromCart = async (lineItemIdsToRemove: string[]) => {
     if (!initialSet.current) initialSet.current = true;
     if (typeof checkoutID === 'undefined') {
-      console.log('no checkout id');
+      // console.log('no checkout id');
       await gettingCheckoutID();
     }
     if (currentCheckout.lineItems < 1) {
-      console.log('cart empty');
+      // console.log('cart empty');
       return;
     }
     try {

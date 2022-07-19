@@ -10,7 +10,6 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 export default function Home(query: any) {
   const image = getImage(query.data.file)
-  console.log(image);
   gsap.registerPlugin(ScrollTrigger);
   const { passed } = useStoreContext();
   useEffect(() => {
