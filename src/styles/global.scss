@@ -101,13 +101,13 @@ a {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(153, 153, 153, 0.411);
   &:hover {
-    @include clipText;
-    cursor: pointer;
-    background-color: rgba(124, 124, 124, 0.649);
+    cursor: pointer !important;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.541);
   }
   &.selected {
-    @include clipText;
-    background-color: rgba(124, 124, 124, 0.649);
+    color: #ffffff;
+    background-color: rgb(0, 0, 0);
   }
 }
 $l-r-padding: 2.5vw;
@@ -169,7 +169,7 @@ $l-r-padding: 2.5vw;
         padding: 2vh 0;
         span {
           text-transform: uppercase;
-           font-weight: bold;
+          font-weight: bold;
           font-size: 1.2rem;
         }
       }

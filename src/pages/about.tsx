@@ -13,14 +13,14 @@ const About = (query: any) => {
     let founder = gsap.timeline();
     if (window.matchMedia('( max-width: 924px)').matches) {
       let founder = gsap.timeline({
-        scrollTrigger: { trigger: '.img-box', start: 'top 80%' },
+        scrollTrigger: { trigger: '.img-box', start: 'top 90%' },
       });
       founder.fromTo(
         '.img-box img',
         {
           opacity: 0.5,
           scale: 0.7,
-          duration: 4,
+          duration: 1,
           ease: 'linear',
         },
         {

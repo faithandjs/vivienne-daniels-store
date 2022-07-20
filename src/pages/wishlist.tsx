@@ -15,14 +15,9 @@ const Wishlist = () => {
           {wishlist.length > 0 ? (
             wishlist.map((item: productProp, index: number) => {
               let fill = setfilling(item.node.title);
-              let num = Math.round(Math.random() * 50) / 10;
-              let people = String(num) + 'k';
-              if (String(num)[0] === '0' && String(num).length > 1) {
-                people = String(num)[2] + 'k';
-              }
               return (
                 <li key={index} className="product-card">
-                  <WishlistCard product={item} fill={fill} people={people} />
+                  <WishlistCard product={item} fill={fill} />
                 </li>
               );
             })

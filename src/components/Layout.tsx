@@ -19,8 +19,8 @@ interface prop {
 }
 const Layout = ({ children, page }: prop) => {
   gsap.registerPlugin(ScrollTrigger);
-  const { currentCheckout } = useStoreContext();
-
+  const { currentCheckout, settingStatus, status } = useStoreContext();
+  console.log(status);
   useEffect(() => {
     ScrollTrigger.create({
       trigger: 'header',

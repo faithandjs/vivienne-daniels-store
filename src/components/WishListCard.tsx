@@ -3,7 +3,7 @@ import Heart from './Heart';
 import { Link } from 'gatsby';
 import Amount from './Amount';
 
-export const WishlistCard = ({ product, people }: productCardProp) => {
+export const WishlistCard = ({ product }: productCardProp) => {
   const { featuredImage, priceRangeV2, title, handle } = product.node;
 
   return (
@@ -17,7 +17,7 @@ export const WishlistCard = ({ product, people }: productCardProp) => {
           <div className="flex">
             <Amount amount={priceRangeV2.maxVariantPrice.amount}></Amount>
             <div className="hearts">
-              <p>{people}</p>
+              <p>{`${title.length}k`}</p>
 
               <div className="addToWL">
                 <svg viewBox="0 0 40 40">

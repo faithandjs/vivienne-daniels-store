@@ -3,6 +3,17 @@
 
 $l-r-padding: 2.5vw;
 
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+input[type="search"]::-o-search-decoration,
+input[type="search"]::-o-search-results-button,
+input[type="search"]::-o-search-results-decoration {
+  display: none;
+}
 .products-and-menu {
   display: flex;
   width: 100%;
@@ -63,14 +74,8 @@ $l-r-padding: 2.5vw;
             margin-left: 10px;
             button {
               font-size: 1.05rem;
-              color: #000;
               margin: 5px;
               padding: 5px 7px;
-              &:hover {
-                @include clipText;
-                cursor: pointer;
-                background-color: rgba(124, 124, 124, 0.649);
-              }
             }
           }
         }

@@ -7,7 +7,7 @@ import {
   useState,
 } from 'react';
 import Client from 'shopify-buy';
-import { productProp, cartProp, productDetails } from '../../type';
+import { productProp, cartProp, statuses } from '../../type';
 interface contextProp {
   children: JSX.Element;
 }
@@ -28,10 +28,13 @@ export const Context = ({ children }: contextProp) => {
   const [checkoutID, setCheckoutID] = useState<any>();
   const [currentCheckout, setCurrentCheckout] = useState<any>('');
   const [wishlist, setWishlist] = useState<productProp[]>([]);
+  const [status, setStatus] = useState<statuses>(statuses.NEUTRAL);
   const initialSet = useRef(false);
 
   const passed = useRef(false);
-
+  const settingStatus = () => {
+    setStatus(statuses.NEUTRAL);
+  };
   const setfilling = (title: string) => {
     let fill: '#fc0000e7' | 'transparent' = 'transparent';
     wishlist
@@ -93,11 +96,10 @@ export const Context = ({ children }: contextProp) => {
     if (!initialSet.current) initialSet.current = true;
 
     if (typeof checkoutID === 'undefined') {
-      // console.log('no checkout id');
       await gettingCheckoutID();
-
       addToCart({ quantity, variant });
     }
+    setStatus(statuses.LOADING);
     const lineItemsToAdd = [
       {
         variantId: variant,
@@ -110,7 +112,9 @@ export const Context = ({ children }: contextProp) => {
         .then((checkout) => {
           settingCheckout(checkout);
         });
+      setStatus(statuses.ITEM_ADDED);
     } catch (e) {
+      setStatus(statuses.ITEM_NOT_ADDED);
       console.log(e);
     }
   };
@@ -135,20 +139,22 @@ export const Context = ({ children }: contextProp) => {
   const deleteFromCart = async (lineItemIdsToRemove: string[]) => {
     if (!initialSet.current) initialSet.current = true;
     if (typeof checkoutID === 'undefined') {
-      // console.log('no checkout id');
       await gettingCheckoutID();
     }
     if (currentCheckout.lineItems < 1) {
-      // console.log('cart empty');
       return;
     }
+    setStatus(statuses.LOADING);
     try {
       await client.checkout
         .removeLineItems(checkoutID, lineItemIdsToRemove)
         .then((checkout) => {
           settingCheckout(checkout);
         });
-    } catch (e) {}
+      setStatus(statuses.ITEM_DELETED);
+    } catch (e) {
+      setStatus(statuses.NEUTRAL);
+    }
   };
 
   const value = useMemo(
@@ -160,6 +166,8 @@ export const Context = ({ children }: contextProp) => {
       editWishlist,
       wishlist,
       setfilling,
+      status,
+      settingStatus,
     }),
     [
       addToCart,
@@ -169,6 +177,8 @@ export const Context = ({ children }: contextProp) => {
       editWishlist,
       wishlist,
       setfilling,
+      status,
+      settingStatus,
     ],
   );
   return <Provider value={value}>{children}</Provider>;

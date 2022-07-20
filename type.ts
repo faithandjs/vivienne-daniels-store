@@ -49,9 +49,15 @@ export interface productsProp {
 export interface productCardProp {
   product: productProp;
   fill?: string;
-  people?: string;
 }
 export interface cartProp {
   quantity: number;
   variant: string;
+}
+export enum statuses {
+  NEUTRAL = '...',
+  LOADING = 'loading...',
+  ITEM_ADDED = 'succesfully added',
+  ITEM_NOT_ADDED = 'add unsuccesful',
+  ITEM_DELETED = 'item deleted',
 }
