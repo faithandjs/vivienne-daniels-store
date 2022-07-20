@@ -20,7 +20,7 @@ section.cart {
         height: clamp(88px, 17vw, 162px);
 
         img {
-          object-fit: cover;
+          object-fit: scale-down;
         }
       }
       .details {

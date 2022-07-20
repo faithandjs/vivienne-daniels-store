@@ -13,6 +13,7 @@ import Twitter from '../icons/twitter.png';
 import Mail from '../icons/mail.png';
 
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { statuses } from 'type';
 interface prop {
   children: JSX.Element;
   page: 'home' | 'about' | 'products' | 'wishlist' | 'cart' | 'none';
@@ -20,7 +21,7 @@ interface prop {
 const Layout = ({ children, page }: prop) => {
   gsap.registerPlugin(ScrollTrigger);
   const { currentCheckout, settingStatus, status } = useStoreContext();
-  console.log(status);
+ 
   useEffect(() => {
     ScrollTrigger.create({
       trigger: 'header',
@@ -69,13 +70,53 @@ const Layout = ({ children, page }: prop) => {
       reveal.play();
     }
   });
+  useEffect(() => {
+    const msg_status = document.querySelector('.msg');
+    const msg_status_div = document.querySelector('.msg div');
+    if (status === statuses.NEUTRAL) {
+      msg_status_div?.removeAttribute('class');
+    }
+    if (status === statuses.LOADING) {
+      gsap.to(msg_status, {
+        y: 0,
+        ease: 'none',
+      });
+      msg_status_div?.setAttribute('class', 'loading');
+    }
+    if (status === statuses.ITEM_ADDED || status === statuses.ITEM_DELETED) {
+      msg_status_div?.setAttribute('class', 'success');
+    }
+    if (
+      status === statuses.ITEM_NOT_ADDED ||
+      status === statuses.ITEM_NOT_DELETED
+    ) {
+      msg_status_div?.setAttribute('class', 'error');
+    }
+
+    if (
+      status === statuses.ITEM_NOT_ADDED ||
+      status === statuses.ITEM_NOT_DELETED ||
+      status === statuses.ITEM_ADDED ||
+      status === statuses.ITEM_DELETED
+    ) {
+      setTimeout(() => {
+        gsap.to(msg_status, {
+          y: '-100vh',
+          ease: 'none',
+          duration: 0.2,
+        });
+        settingStatus();
+      }, 3000);
+    }
+  }, [status]);
   const classes = `children ` + (page === 'about' ? '' : page);
 
   return (
     <>
       <header className={page}>
         <div className="logo">
-          <Link to="/about">vd</Link>
+          vd
+          {/* <Link to="/about"></Link> */}
         </div>
         <ul className="links">
           <Link to="/">
@@ -113,7 +154,12 @@ const Layout = ({ children, page }: prop) => {
           </Link>
         </ul>
       </header>
-      <section className={classes}>{children}</section>
+      <section className={classes}>
+        <div className="msg">
+          <div>{status}</div>
+        </div>
+        {children}
+      </section>
 
       <footer className={page}>
         <div className=" large">

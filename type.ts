@@ -59,5 +59,6 @@ export enum statuses {
   LOADING = 'loading...',
   ITEM_ADDED = 'succesfully added',
   ITEM_NOT_ADDED = 'add unsuccesful',
+  ITEM_NOT_DELETED = 'delete unsuccesful',
   ITEM_DELETED = 'item deleted',
 }

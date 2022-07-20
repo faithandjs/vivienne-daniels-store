@@ -9,6 +9,7 @@
 }
 $header_height: 100px;
 $footer_height: 75px;
+
 header,
 footer {
   z-index: 12;
@@ -125,9 +126,45 @@ section.cart {
 }
 .children {
   background-color: #fff;
+
+  .msg {
+    display: none;
+    position: fixed;
+    top: 50px;
+    transform: translate(0, -100vh);
+    color: white;
+    width: 100%;
+    z-index: 3;
+    background-color: transparent;
+    justify-content: center;
+
+    div {
+      text-align: center;
+      padding: 10px 25px;
+      background-color: grey;
+      width: max-content;
+    border-radius: 5px;
+
+      &.success {
+        background-color: green;
+      }
+      &.error {
+        background-color: rgb(226, 24, 24);
+      }
+      &.loading {
+        background-color: rgb(233, 203, 71);
+      }
+    }
+  }
 }
 .children.home {
   z-index: 15;
+}
+.children.cart,
+.children.none {
+  .msg {
+    display: flex;
+  }
 }
 footer {
   height: $footer_height;
@@ -270,6 +307,10 @@ footer {
     }
   }
   footer {
+    &.home {
+      background-color: $background;
+      color: #fff;
+    }
     .large-logos-box {
       display: none;
     }

@@ -187,11 +187,11 @@ input[type="search"]::-o-search-results-decoration {
     .filter {
       z-index: 2;
       transform: rotate(0.25turn) translate(0) scale(0.5);
+      border-radius: 3px;
       &:hover {
         cursor: pointer;
-        left: -1.3vw;
-        border-radius: 3px;
-        transform: rotate(0.25turn) translate(0) scale(0.7);
+        // left: -1.3vw;
+        // transform: rotate(0.25turn) translate(0) scale(0.7);
       }
     }
     .main {

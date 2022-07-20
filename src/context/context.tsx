@@ -153,7 +153,7 @@ export const Context = ({ children }: contextProp) => {
         });
       setStatus(statuses.ITEM_DELETED);
     } catch (e) {
-      setStatus(statuses.NEUTRAL);
+      setStatus(statuses.ITEM_NOT_DELETED);
     }
   };
 

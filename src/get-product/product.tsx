@@ -227,16 +227,10 @@ const Product = ({ pageContext, data }: prop) => {
             {media.length > 1 && (
               <div className="markers">
                 <div className="prev" onClick={() => navigate('prev')}>
-                  <img
-                    src={left_arrow}
-                    alt={`previous image of ${title}`}
-                  />
+                  <img src={left_arrow} alt={`previous image of ${title}`} />
                 </div>
                 <div className="next" onClick={() => navigate('next')}>
-                  <img
-                    src={next}
-                    alt={`next image of ${title}`}
-                  />
+                  <img src={next} alt={`next image of ${title}`} />
                 </div>
               </div>
             )}
@@ -317,6 +311,7 @@ const Product = ({ pageContext, data }: prop) => {
                         if (selected === undefined) {
                           selectedElement = '';
                         } else {
+                          // console.log(innerItem, 'selected')
                           const element = document.querySelector(
                             `.${innerItem.replaceAll(' ', '')}`,
                           )?.classList;
@@ -326,6 +321,7 @@ const Product = ({ pageContext, data }: prop) => {
                           ) {
                             element?.add('selected');
                           } else {
+                            // console.log('remove other') 
                             element?.remove('selected');
                           }
                         }
@@ -336,7 +332,7 @@ const Product = ({ pageContext, data }: prop) => {
                                 className={`color ${innerItem.replaceAll(
                                   ' ',
                                   '',
-                                )}`}
+                                )} ${index === 0 ? 'selected' : ''}`}
                                 key={index}
                                 onClick={() => {
                                   setSelected({
@@ -357,9 +353,9 @@ const Product = ({ pageContext, data }: prop) => {
                                     });
                                   });
 
-                                  const allImgs = document.querySelectorAll(
-                                    '.images .img-box img',
-                                  );
+                                  // const allImgs = document.querySelectorAll(
+                                  //   '.images .img-box img',
+                                  // );
                                   media.forEach((item, index) => {
                                     const source = item.preview.image.src;
                                     if (temp.includes(source)) {
@@ -392,7 +388,7 @@ const Product = ({ pageContext, data }: prop) => {
                                 className={`${innerItem.replaceAll(
                                   ' ',
                                   '',
-                                )} box-sm`}
+                                )} box-sm ${index === 0 ? 'selected' : ''}`}
                                 key={index}
                                 onClick={() => {
                                   setSelected({
