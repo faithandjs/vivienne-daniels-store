@@ -143,30 +143,20 @@
             margin-left: 0;
 
             &.color {
-              border: 1px solid rgba(71, 71, 71, 0.212);
+              border: 1px solid rgba(87, 86, 86, 0.13);
               width: 35px;
               height: 35px;
               margin: 8px 15px;
               margin-left: 0;
               border-radius: 50%;
+              transform: scale(.95);
+              -o-transform: scale(.95);
 
               &.selected {
                 position: relative;
-
-                border: 0 !important;
-                // &::before {
-                //   // z-index: -1;
-                //   content: '';
-                //   position: absolute;
-                //   border: 3px solid rgba(44, 44, 44, 0.678);
-                //   top: 50%;
-                //   left: 50%;
-                //   transform: translate(-50%, -50%);
-                //   width: calc(100% + 3px);
-                //   height: calc(100% + 3px);
-                //   border-radius: 50%;
-                //   background-color: rgb(0, 0, 0);
-                // }
+                transform: scale(1.15);
+                -o-transform: scale(1.15);
+                
               }
             }
             &:hover {
