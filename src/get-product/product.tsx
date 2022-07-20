@@ -34,7 +34,7 @@ const Product = ({ pageContext, data }: prop) => {
   const [displayOptions, setDisplayOptions] = useState<
     { title: string; options: string[] }[]
   >([]);
-  const [selected, setSelected] = useState<any>();
+  const [selected, setSelected] = useState<any>({});
   const [namesArray, setNamesArray] = useState<string[]>([]);
   const [quantity, setQuantity] = useState<number>(1);
   const fill = setfilling(title);
@@ -218,7 +218,6 @@ const Product = ({ pageContext, data }: prop) => {
       }
     }
   };
-
   return (
     <Layout page="none">
       <>
@@ -307,11 +306,8 @@ const Product = ({ pageContext, data }: prop) => {
                             ? innerItem.toLowerCase().replaceAll(' ', '_')
                             : innerItem.toLowerCase();
                         let returnee: JSX.Element = <></>;
-                        let selectedElement;
-                        if (selected === undefined) {
-                          selectedElement = '';
-                        } else {
-                          // console.log(innerItem, 'selected')
+
+                        if (selected !== {}) {
                           const element = document.querySelector(
                             `.${innerItem.replaceAll(' ', '')}`,
                           )?.classList;
@@ -321,11 +317,18 @@ const Product = ({ pageContext, data }: prop) => {
                           ) {
                             element?.add('selected');
                           } else {
-                            // console.log('remove other') 
                             element?.remove('selected');
                           }
                         }
-
+                        if (
+                          index === 0 &&
+                          !Object.keys(selected).includes(item.title)
+                        ) {
+                          setSelected({
+                            ...selected,
+                            [`${item.title}`]: innerItem,
+                          });
+                        }
                         item.title.toLowerCase() === 'color'
                           ? (returnee = (
                               <li

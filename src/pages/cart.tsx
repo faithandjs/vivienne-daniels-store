@@ -26,7 +26,20 @@ interface prop {
 const Cart = () => {
   const { deleteFromCart, currentCheckout } = useStoreContext();
   const [currentI, setCurrentI] = useState<{ id: string; title: string }>();
+
   const CartCard = ({ id, quantity, variant, title }: prop) => {
+    const seperate = () => {
+      const arr = Array.from(variant.title);
+      if (arr.includes('/')) {
+        const id = arr.findIndex((item) => item === '/');
+        const first = variant.title.substring(0, id - 1);
+        const second = variant.title.substring(id + 2, variant.title.length);
+        return [first, second];
+      } else {
+        return variant.title;
+      }
+    };
+    const newVar = seperate();
     return (
       <div className="box">
         <Link
@@ -58,7 +71,18 @@ const Cart = () => {
             </button>
           </div>
           <ul>
-            <li className="box-sm">{variant.title}</li>
+            <>
+              {typeof newVar === 'string' ? (
+                <li className="box-sm">{newVar}</li>
+              ) : (
+                newVar.map((item, index) => {
+                return  <li className="box-sm" key={index}>
+                    {item}
+                  </li>;
+                })
+              )}
+            </>
+
             <li className="box-sm">{quantity}</li>
           </ul>
           <div className="lower">

@@ -21,7 +21,7 @@ interface prop {
 const Layout = ({ children, page }: prop) => {
   gsap.registerPlugin(ScrollTrigger);
   const { currentCheckout, settingStatus, status } = useStoreContext();
- 
+
   useEffect(() => {
     ScrollTrigger.create({
       trigger: 'header',
@@ -74,7 +74,7 @@ const Layout = ({ children, page }: prop) => {
     const msg_status = document.querySelector('.msg');
     const msg_status_div = document.querySelector('.msg div');
     if (status === statuses.NEUTRAL) {
-      msg_status_div?.removeAttribute('class');
+      // msg_status_div?.removeAttribute('class');
     }
     if (status === statuses.LOADING) {
       gsap.to(msg_status, {
@@ -103,10 +103,13 @@ const Layout = ({ children, page }: prop) => {
         gsap.to(msg_status, {
           y: '-100vh',
           ease: 'none',
-          duration: 0.2,
+          duration: 0.5,
         });
+      }, 2000);
+
+      setTimeout(() => {
         settingStatus();
-      }, 3000);
+      }, 4000);
     }
   }, [status]);
   const classes = `children ` + (page === 'about' ? '' : page);
