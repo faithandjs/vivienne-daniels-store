@@ -101,12 +101,12 @@ a {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(153, 153, 153, 0.411);
   &:hover {
-    cursor: pointer !important;
-    color: #ffffff;
+    cursor: pointer ;
+    color: #ffffff !important;
     background-color: rgba(0, 0, 0, 0.541);
   }
   &.selected {
-    color: #ffffff;
+    color: #ffffff !important;
     background-color: rgb(0, 0, 0);
   }
 }

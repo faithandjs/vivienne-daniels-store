@@ -74,8 +74,13 @@ input[type="search"]::-o-search-results-decoration {
             margin-left: 10px;
             button {
               font-size: 1.05rem;
+              color: inherit;
               margin: 5px;
               padding: 5px 7px;
+
+              // &:hover, &.selected{
+              //   color: inherit;
+              // }
             }
           }
         }
