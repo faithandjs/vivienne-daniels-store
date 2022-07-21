@@ -3,6 +3,9 @@
     width: calc(33% - 5vw);
     .img-box {
       height: 30vw;
+      img {
+        object-position: bottom;
+      }
     }
     .details {
       .flex {
@@ -23,9 +26,6 @@
       width: calc(50% - 5vw);
       .img-box {
         height: 40vw;
-        img {
-          object-position: bottom;
-        }
       }
     }
   }

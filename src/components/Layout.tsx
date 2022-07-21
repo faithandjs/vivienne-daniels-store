@@ -1,6 +1,6 @@
 import '../styles/layout.scss';
 import { Link } from 'gatsby';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import useStoreContext from '@/context/context';
 import about from '../icons/about.png';
@@ -11,7 +11,7 @@ import cart from '../icons/shopping-cart.png';
 import IG from '../icons/instagram.png';
 import Twitter from '../icons/twitter.png';
 import Mail from '../icons/mail.png';
-
+import { statusProp } from 'type';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { statuses } from 'type';
 interface prop {
@@ -20,8 +20,7 @@ interface prop {
 }
 const Layout = ({ children, page }: prop) => {
   gsap.registerPlugin(ScrollTrigger);
-  const { currentCheckout, settingStatus, status } = useStoreContext();
-
+  const { currentCheckout, resettingStatus, statArray } = useStoreContext();
   useEffect(() => {
     ScrollTrigger.create({
       trigger: 'header',
@@ -70,50 +69,25 @@ const Layout = ({ children, page }: prop) => {
       reveal.play();
     }
   });
-  useEffect(() => {
-    const msg_status = document.querySelector('.msg');
-    const msg_status_div = document.querySelector('.msg div');
-    if (status === statuses.NEUTRAL) {
-      // msg_status_div?.removeAttribute('class');
-    }
-    if (status === statuses.LOADING) {
-      gsap.to(msg_status, {
-        y: 0,
-        ease: 'none',
-      });
-      msg_status_div?.setAttribute('class', 'loading');
-    }
-    if (status === statuses.ITEM_ADDED || status === statuses.ITEM_DELETED) {
-      msg_status_div?.setAttribute('class', 'success');
-    }
-    if (
-      status === statuses.ITEM_NOT_ADDED ||
-      status === statuses.ITEM_NOT_DELETED
-    ) {
-      msg_status_div?.setAttribute('class', 'error');
-    }
-
-    if (
-      status === statuses.ITEM_NOT_ADDED ||
-      status === statuses.ITEM_NOT_DELETED ||
-      status === statuses.ITEM_ADDED ||
-      status === statuses.ITEM_DELETED
-    ) {
-      setTimeout(() => {
-        gsap.to(msg_status, {
-          y: '-100vh',
-          ease: 'none',
-          duration: 0.5,
-        });
-      }, 2000);
-
-      setTimeout(() => {
-        settingStatus();
-      }, 4000);
-    }
-  }, [status]);
   const classes = `children ` + (page === 'about' ? '' : page);
 
+  const messageElement = <></>;
+  useEffect(() => {
+    if (statArray !== undefined && statArray.length !== 0) {
+      console.log(statArray);
+      // setTimeout(() => {
+      //   gsap.to(`.item${statArray[statArray.length - 1].id}`, {
+      //     x: '-100vh',
+      //     ease: 'none',
+      //     duration: 0.5,
+      //     opacity: 0,
+      //   });
+      //   setTimeout(() => {
+      //     resettingStatus()
+      //   }, 2000);
+      // }, 3500);
+    }
+  }, [statArray]);
   return (
     <>
       <header className={page}>
@@ -159,7 +133,40 @@ const Layout = ({ children, page }: prop) => {
       </header>
       <section className={classes}>
         <div className="msg">
-          <div>{status}</div>
+          {statArray !== undefined ? (
+            statArray.map((item: statusProp, index: number) => {
+              setTimeout(() => {
+                gsap.to(`.item${item.id}`, {
+                  x: '-100vh',
+                  ease: 'none',
+                  duration: 0.5,
+                  opacity: 0,
+                });
+                setTimeout(() => {  
+                  resettingStatus(item.id);
+                  console.log('reset', item.id);
+                }, 2000);
+              }, 3500);
+
+              if (index === 0) {
+                return (
+                  <div
+                    className={`item${item.id} ${
+                      item.stat === statuses.ITEM_ADDED ||
+                      item.stat === statuses.ITEM_DELETED
+                        ? 'success'
+                        : 'error'
+                    }`}
+                    key={index}
+                  >
+                    {item.stat}
+                  </div>
+                );
+              }
+            })
+          ) : (
+            <></>
+          )}
         </div>
         {children}
       </section>

@@ -356,9 +356,6 @@ const Product = ({ pageContext, data }: prop) => {
                                     });
                                   });
 
-                                  // const allImgs = document.querySelectorAll(
-                                  //   '.images .img-box img',
-                                  // );
                                   media.forEach((item, index) => {
                                     const source = item.preview.image.src;
                                     if (temp.includes(source)) {

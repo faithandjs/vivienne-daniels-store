@@ -7,7 +7,7 @@ import {
   useState,
 } from 'react';
 import Client from 'shopify-buy';
-import { productProp, cartProp, statuses } from '../../type';
+import { productProp, cartProp, statuses, statusProp } from '../../type';
 interface contextProp {
   children: JSX.Element;
 }
@@ -28,13 +28,34 @@ export const Context = ({ children }: contextProp) => {
   const [checkoutID, setCheckoutID] = useState<any>();
   const [currentCheckout, setCurrentCheckout] = useState<any>('');
   const [wishlist, setWishlist] = useState<productProp[]>([]);
-  const [status, setStatus] = useState<statuses>(statuses.NEUTRAL);
-  const initialSet = useRef(false);
 
+  const initialSet = useRef(false);
+  const [statArray, setStatArray] = useState<statusProp[]>();
   const passed = useRef(false);
-  const settingStatus = () => {
-    setStatus(statuses.NEUTRAL);
+  const msg_no = useRef(-1);
+
+  const settingStatus = ({ id = 0, stat = statuses.LOADING }: statusProp) => {
+    console.log(statArray);
+    if (id === 0 || statArray === undefined) {
+      setStatArray([{ id, stat }]);
+    } else {
+      const temp = [...statArray!, { id, stat }];
+      // console.log(statArray, temp);
+      setStatArray(temp);
+    }
   };
+  const resettingStatus = (id:number) => {
+    const temp = statArray?.filter((item, index) => item.id !== id);
+    console.log('temp minus item', id, ' : ', temp)
+    if (temp?.length !== 0 ) {
+
+      setStatArray(temp);
+    } else {
+      setStatArray([]);
+      msg_no.current = -1;
+    }
+  };
+
   const setfilling = (title: string) => {
     let fill: '#fc0000e7' | 'transparent' = 'transparent';
     wishlist
@@ -99,7 +120,7 @@ export const Context = ({ children }: contextProp) => {
       await gettingCheckoutID();
       addToCart({ quantity, variant });
     }
-    setStatus(statuses.LOADING);
+
     const lineItemsToAdd = [
       {
         variantId: variant,
@@ -112,9 +133,15 @@ export const Context = ({ children }: contextProp) => {
         .then((checkout) => {
           settingCheckout(checkout);
         });
-      setStatus(statuses.ITEM_ADDED);
+      const id = ++msg_no.current;
+      msg_no.current = id;
+      const stat: statuses = statuses.ITEM_ADDED;
+      settingStatus({ id, stat });
     } catch (e) {
-      setStatus(statuses.ITEM_NOT_ADDED);
+      const id = ++msg_no.current;
+      msg_no.current = id;
+      const stat: statuses = statuses.ITEM_NOT_ADDED;
+      settingStatus({ id, stat });
       console.log(e);
     }
   };
@@ -144,16 +171,23 @@ export const Context = ({ children }: contextProp) => {
     if (currentCheckout.lineItems < 1) {
       return;
     }
-    setStatus(statuses.LOADING);
+
+    // const id = ++msg_no.current;
     try {
       await client.checkout
         .removeLineItems(checkoutID, lineItemIdsToRemove)
         .then((checkout) => {
           settingCheckout(checkout);
         });
-      setStatus(statuses.ITEM_DELETED);
+      const id = ++msg_no.current;
+      msg_no.current = id;
+      const stat: statuses = statuses.ITEM_DELETED;
+      settingStatus({ id, stat });
     } catch (e) {
-      setStatus(statuses.ITEM_NOT_DELETED);
+      const id = ++msg_no.current;
+      msg_no.current = id;
+      const stat: statuses = statuses.ITEM_NOT_DELETED;
+      settingStatus({ id, stat });
     }
   };
 
@@ -166,19 +200,19 @@ export const Context = ({ children }: contextProp) => {
       editWishlist,
       wishlist,
       setfilling,
-      status,
-      settingStatus,
+      statArray,
+      resettingStatus,
     }),
     [
-      addToCart,
-      deleteFromCart,
+      // addToCart,
+      // deleteFromCart,
       currentCheckout,
       passed,
-      editWishlist,
+      // editWishlist,
       wishlist,
-      setfilling,
-      status,
-      settingStatus,
+      // setfilling,
+      statArray,
+      // resettingStatus,
     ],
   );
   return <Provider value={value}>{children}</Provider>;

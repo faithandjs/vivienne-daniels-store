@@ -27,6 +27,47 @@ const Cart = () => {
   const { deleteFromCart, currentCheckout } = useStoreContext();
   const [currentI, setCurrentI] = useState<{ id: string; title: string }>();
 
+  // useEffect(() => {
+  //   const msg_status = document.querySelector('.msg');
+  //   const msg_status_div = document.querySelector('.msg div');
+  //   if (status === statuses.LOADING) {
+  //     gsap.to(msg_status, {
+  //       y: 0,
+  //       ease: 'none',
+  //     });
+  //     msg_status_div?.setAttribute('class', 'loading');
+  //   }
+  //   if (status === statuses.ITEM_ADDED || status === statuses.ITEM_DELETED) {
+  //     msg_status_div?.setAttribute('class', 'success');
+  //   }
+  //   if (
+  //     status === statuses.ITEM_NOT_ADDED ||
+  //     status === statuses.ITEM_NOT_DELETED
+  //   ) {
+  //     msg_status_div?.setAttribute('class', 'error');
+  //   }
+
+  //   if (
+  //     status === statuses.ITEM_NOT_ADDED ||
+  //     status === statuses.ITEM_NOT_DELETED ||
+  //     status === statuses.ITEM_ADDED ||
+  //     status === statuses.ITEM_DELETED
+  //   ) {
+  //     setTimeout(() => {
+  //       gsap.to(msg_status, {
+  //         y: '-100vh',
+  //         ease: 'none',
+  //         duration: 0.5,
+  //       });
+  //       console.log('first');
+  //       setTimeout(() => {
+  //         settingStatus();
+  //         console.log('2nd');
+  //       }, 2000);
+  //     }, 2000);
+  //   }
+  // }, [status]);
+
   const CartCard = ({ id, quantity, variant, title }: prop) => {
     const seperate = () => {
       const arr = Array.from(variant.title);
@@ -76,9 +117,11 @@ const Cart = () => {
                 <li className="box-sm">{newVar}</li>
               ) : (
                 newVar.map((item, index) => {
-                return  <li className="box-sm" key={index}>
-                    {item}
-                  </li>;
+                  return (
+                    <li className="box-sm" key={index}>
+                      {item}
+                    </li>
+                  );
                 })
               )}
             </>

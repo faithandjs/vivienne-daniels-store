@@ -62,3 +62,7 @@ export enum statuses {
   ITEM_NOT_DELETED = 'delete unsuccesful',
   ITEM_DELETED = 'item deleted',
 }
+export interface statusProp {
+  id: number;
+  stat: statuses;
+}
