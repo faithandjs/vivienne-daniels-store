@@ -74,61 +74,50 @@ const Layout = ({ children, page }: prop) => {
   const messageElement = <></>;
   useEffect(() => {
     if (statArray !== undefined && statArray.length !== 0) {
-      console.log(statArray);
-      // setTimeout(() => {
-      //   gsap.to(`.item${statArray[statArray.length - 1].id}`, {
-      //     x: '-100vh',
-      //     ease: 'none',
-      //     duration: 0.5,
-      //     opacity: 0,
-      //   });
-      //   setTimeout(() => {
-      //     resettingStatus()
-      //   }, 2000);
-      // }, 3500);
+      // console.log(statArray);
     }
   }, [statArray]);
   return (
     <>
       <header className={page}>
-        <div className="logo">
-          vd
-          {/* <Link to="/about"></Link> */}
-        </div>
+        <div className="logo">vd</div>
         <ul className="links">
-          <Link to="/">
-            <li id="home">
+          <li id="home">
+            {' '}
+            <Link to="/">
               <span>home</span>
               <img src={home} alt="home icon" />
-            </li>
-          </Link>
-          <Link to="/about">
-            <li id="about">
+            </Link>{' '}
+          </li>
+          <li id="about">
+            {' '}
+            <Link to="/about">
               <span>about</span>
               <img src={about} alt="about icon" />
-            </li>
-          </Link>
-          <Link to="/products">
-            <li id="products">
+            </Link>{' '}
+          </li>
+          <li id="products">
+            {' '}
+            <Link to="/products">
               <span>products</span>
               <img src={store} alt="products icon" />
-            </li>
-          </Link>
-          <Link to="/wishlist">
-            <li id="wishlist">
+            </Link>{' '}
+          </li>
+          <li id="wishlist">
+            <Link to="/wishlist">
               <span>wishlist</span>
               <img src={wishlist} alt="wishlist icon" />
-            </li>
-          </Link>
-          <Link to="/cart">
-            <li id="cart">
+            </Link>{' '}
+          </li>
+          <li id="cart">
+            <Link to="/cart">
               <span>cart</span>
               <img src={cart} alt="cart icon" />
               <span className="number">
                 {currentCheckout ? currentCheckout.lineItems.length : `0`}
               </span>
-            </li>
-          </Link>
+            </Link>
+          </li>
         </ul>
       </header>
       <section className={classes}>
@@ -142,9 +131,9 @@ const Layout = ({ children, page }: prop) => {
                   duration: 0.5,
                   opacity: 0,
                 });
-                setTimeout(() => {  
+                setTimeout(() => {
                   resettingStatus(item.id);
-                  console.log('reset', item.id);
+                  // console.log('reset', item.id);
                 }, 2000);
               }, 3500);
 

@@ -35,7 +35,7 @@ export const Context = ({ children }: contextProp) => {
   const msg_no = useRef(-1);
 
   const settingStatus = ({ id = 0, stat = statuses.LOADING }: statusProp) => {
-    console.log(statArray);
+    // console.log(statArray);
     if (id === 0 || statArray === undefined) {
       setStatArray([{ id, stat }]);
     } else {
@@ -46,7 +46,7 @@ export const Context = ({ children }: contextProp) => {
   };
   const resettingStatus = (id:number) => {
     const temp = statArray?.filter((item, index) => item.id !== id);
-    console.log('temp minus item', id, ' : ', temp)
+    // console.log('temp minus item', id, ' : ', temp)
     if (temp?.length !== 0 ) {
 
       setStatArray(temp);
@@ -98,7 +98,7 @@ export const Context = ({ children }: contextProp) => {
         });
       }
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
   };
   useEffect(() => {
@@ -142,7 +142,7 @@ export const Context = ({ children }: contextProp) => {
       msg_no.current = id;
       const stat: statuses = statuses.ITEM_NOT_ADDED;
       settingStatus({ id, stat });
-      console.log(e);
+      // console.log(e);
     }
   };
   const editWishlist = (product: productProp) => {
