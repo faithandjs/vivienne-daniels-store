@@ -148,10 +148,10 @@ section.cart {
       border-radius: 5px;
 
       &.success {
-        background-color: green;
+        background-color: rgba(0, 128, 0, 0.815);
       }
       &.error {
-        background-color: rgb(226, 24, 24);
+        background-color: rgba(226, 24, 24, 0.87);
       }
       &.loading {
         background-color: rgb(233, 203, 71);

@@ -144,7 +144,7 @@ const Cart = () => {
           {currentCheckout ? (
             currentCheckout.lineItems.length > 0 ? (
               currentCheckout.lineItems
-                .reverse()
+                // .reverse()
                 .map((item: prop, index: number) => {
                   return (
                     <CartCard
